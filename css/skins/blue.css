@@ -1,0 +1,129 @@
+body {
+  color: #222; }
+
+a {
+  color: #4f88b4; }
+
+p,
+body .main_footer,
+.s_about li {
+  color: #888; }
+
+.color_element {
+  color: #4f88b4; }
+
+.color_bg {
+  background-color: #4f88b4; }
+
+.color_border {
+  border-color: #4f88b4; }
+
+.bg_light {
+  background-color: #FAFAFA; }
+
+.bg_dark {
+  background-color: #222;
+  color: #FAFAFA; }
+  .bg_dark .s_descr::after {
+    background-color: #FAFAFA; }
+  .bg_dark a {
+    color: #FAFAFA;
+    transition: .5s ease; }
+
+.social_wrap li a {
+  transition: .5s ease; }
+  .social_wrap li a:hover {
+    color: #222; }
+
+.footer_social li a {
+  color: #FAFAFA; }
+  .footer_social li a:hover {
+    color: #4f88b4; }
+
+svg path {
+  fill: #222; }
+
+.top_mnu a:hover {
+  color: #4f88b4; }
+
+.top_mnu a {
+  letter-spacing: 4px; }
+
+.top_text p {
+  color: #FAFAFA;
+  letter-spacing: 3.5px; }
+
+.personal_header {
+  letter-spacing: 2px; }
+
+.s_descr {
+  letter-spacing: 5px; }
+  .s_descr::after {
+    background-color: #222; }
+
+section h3 {
+  letter-spacing: 3px;
+  color: #888; }
+
+.s_about p:nth-child(even) {
+  color: #4f88b4; }
+
+.resume_container h3 {
+  color: #222;
+  letter-spacing: 1px; }
+
+.resume_container .left .resume_description strong {
+  margin-left: 10px; }
+
+.resume_container .right .resume_description strong {
+  margin-right: 10px; }
+
+.resume_item .year {
+  background-color: #4f88b4; }
+
+.resume_item .resume_description {
+  letter-spacing: 1px; }
+
+.s_portfolio li {
+  color: #888;
+  letter-spacing: 2px; }
+
+.s_portfolio li.active {
+  color: #FAFAFA;
+  border-bottom: 1px solid #4f88b4; }
+
+.portfolio_item .port_item_cont .popup_content {
+  color: #4f88b4;
+  border-radius: 3px;
+  background: none;
+  border: 1px solid #4f88b4;
+  padding: 4px 5px; }
+
+.contacts_icon {
+  color: #4f88b4; }
+
+.text-danger {
+  color: #4f88b4; }
+
+form input:focus,
+form textarea:focus {
+  border: 1px solid #4f88b4; }
+
+form input,
+form textarea {
+  letter-spacing: 2px; }
+
+form button {
+  background-color: #4f88b4;
+  letter-spacing: 2px; }
+
+form .form-group {
+  letter-spacing: 2px;
+  color: #888; }
+  form .form-group li {
+    color: #FF6347; }
+
+.top_button {
+  color: #FAFAFA; }
+  .top_button:hover {
+    color: #4f88b4; }
