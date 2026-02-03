@@ -95,6 +95,33 @@
 
 						<!-- Section Item Directions -->
 
+                        <?php 
+                            // Call function for category "direction"
+                            $directions = get_landing_items('directions');
+
+                            if ( $directions->have_posts() ) :
+                                while( $directions->have_posts() ) : $directions->the_post();
+                                // add picture
+                                $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+                        ?>
+                                <div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
+                                    <img src="<?php echo $img; ?>" alt="<?php the_title(); ?>">
+                                    <div class = "mask">
+                                        <h2><?php the_title(); ?></h2>
+                                        <p><?php the_content(); ?></p>
+                                    </div>
+                                </div>
+
+                        <?php 
+                            endwhile;
+                            wp_reset_postdata(); // Обязательный сброс после цикла!
+                        endif;
+                        ?>
+
+
+
+                    
+
 						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
 							<img src="img/direction/d_ps.jpg" alt="Alt">
 							<div class="mask">
@@ -123,7 +150,7 @@
 								</ul>
 							</div>
 						</div>	
-
+ 
 						<!-- Section Item Directions -->
 
 						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">

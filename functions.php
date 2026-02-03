@@ -1,5 +1,6 @@
 <?php 
 
+// include CSS and JS files:
 function my_landing_scripts() {
 
     // add a main style file:
@@ -31,9 +32,44 @@ function my_landing_scripts() {
     wp_enqueue_script('main-js-file', get_template_directory_uri() . '/js/common.js', array(), '2.22', true);
 }
 
-
 // add function hook download scripts
 add_action('wp_enqueue_scripts', 'my_landing_scripts');
 
 
 
+// Create a universal post-type "Sections"
+function register_landing_sections() {
+    $labels = array(
+        'name' => 'Sections Landing',
+        'singular_name' => 'Element Section',
+        'menu_name' => 'Content Landing',
+        'add_new' => 'Add Element',
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'menu_icon' => 'dashicons-layout', // icon layers
+        'menu_position' => 5,
+        // Включаем поддержку: Заголовок, Редактор, Картинка, Атрибуты (порядок), Произвольные поля
+        'supports' => array('title', 'editor', 'thumbnail', 'page-attributes', 'custom-fields'),
+        // Подключаем стандартные рубрики (category)
+        'taxonomies' => array('category'),
+    );
+
+    register_post_type('landing_sections', $args);
+}
+add_action('init', 'register_landing_sections');
+
+
+// Universal function when we get elements by category
+function get_landing_items($category_slug) {
+    $args = array(
+        'post_type'       => 'landing_sections',
+        'post_per_page'   => -1,
+        'category_name'   => $category_slug, // Filter by category
+        'orderby'         => 'menu_order',   // Сортировка (можно менять в админке в поле "Порядок")
+        'order'           => 'ASC'
+    );
+    return new WP_Query($args);
+}
