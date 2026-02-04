@@ -348,6 +348,25 @@
 							<h3>Работа</h3>
 							<div class="resume_icon"><i class="icon-basic-display"></i></div>
 
+							<?php
+								$work_items = get_landing_items('resume_work'); 
+								if($work_items->have_posts()): while($work_items->have_posts()): $work_items->the_post();
+								// add fields
+								$year = get_post_meta(get_the_ID(), 'year', true);
+								$position = get_post_meta( get_the_ID(), 'position', true);
+							?>
+								<!-- Left Side Resume -->
+								<div class="resume_item">
+									<div class="year"><?php echo $year; ?></div>
+									<div class="resume_description">
+										<?php the_title(); ?><strong><?php echo $position; ?></strong>
+										<p><?php the_content(); ?></p>
+									</div>
+								</div>
+							<?php endwhile; wp_reset_postdata(); endif; ?>
+
+
+
 							<!-- Left Side Resume -->
 							<div class="resume_item">
 								<div class="year">2021-2022</div>
@@ -386,6 +405,22 @@
 						<div class="col-md-6 col-sm-6 right">
 							<h3>Учеба</h3>
 							<div class="resume_icon"><i class="icon-basic-spread-text"></i></div>
+
+							<?php
+								$study_items = get_landing_items('resume_study');
+								if($study_items->have_posts()): while($study_items->have_posts()): $study_items->the_post();
+									$year = get_post_meta(get_the_ID(), 'year', true);
+									$position = get_post_meta(get_the_ID(), 'position', true);
+							?>
+
+								<div class="resume_item">
+									<div class="year"><?php echo $year; ?></div>
+									<div class="resume_description">
+										<strong><?php echo $position; ?></strong><?php the_title(); ?>
+										<?php the_content(); ?>
+									</div>
+								</div>
+							<?php endwhile; wp_reset_postdata(); endif; ?>
 
 							<!-- Right Side Resume -->
 							<div class="resume_item">
