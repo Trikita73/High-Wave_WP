@@ -1,5 +1,7 @@
 <?php 
 
+add_theme_support( 'post-thumbnails' );
+
 // include CSS and JS files:
 function my_landing_scripts() {
 

@@ -485,7 +485,58 @@
 
 						<!-- Short Job Descriptions -->
 
+
+
+					
+
+							
+						
+
+
+
+
 						<div id="portfolio_grid">
+
+							<?php
+								$portfolio = get_landing_items('portfolio');
+								if($portfolio->have_posts()): while($portfolio->have_posts()): $portfolio->the_post();
+								// переменные
+									$img = get_the_post_thumbnail_url(get_the_ID(), 'full');
+									$subtitle = get_post_meta(get_the_ID(), 'subtitle', true);
+									$filter_class = get_post_meta(get_the_ID(), 'filter_class', true); // category-1, category-2
+									$link_site = get_post_meta(get_the_ID(), 'link_site', true);
+									$link_git = get_post_meta(get_the_ID(), 'link_git', true);
+							?>
+
+							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port <?php echo $filter_class; ?>">
+								<img src="<?php echo $img; ?>" alt="<?php the_title(); ?>">
+								<div class ="port_item_cont">
+									<h3><?php the_title(); ?></h3>
+									<p><?php echo $subtitle; ?></p>
+									<button class="popup_content">Open</button>
+								</div>
+
+								<div class="hidden">
+									<div class="podrt_descr">
+										<div class="modal-box-content">
+											<button class="mfp-close" type="button">×</button>
+											<h3><?php the_title(); ?></h3>
+
+											<?php if($link_site): ?><a href="<?php echo $link_site; ?>" target="_blank">Перейти на сайт</a><?php endif; ?>
+											<?php if($link_git): ?><a href="<?php echo $link_git; ?>" target="_blank">Перейти в репозиторий</a><?php endif; ?>
+
+											<div class="content_text"><?php the_content();  ?></div>
+											<img src="<?php echo $img; ?>" alt="<?php the_title(); ?>">
+										</div>
+									</div>
+								</div>
+							</div>
+							<?php endwhile; wp_reset_postdata(); endif; ?>
+
+
+
+
+
 							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
 								<img src="img/portfolio/yummy_food.jpg" alt="Alt">
 								<div class="port_item_cont">
