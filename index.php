@@ -3,6 +3,121 @@
 <!-- Section About -->
 
 	<section id="about" class="s_about bg_light">
+    <?php
+    // 1. Запрос к базе данных: Найти пост с именем 'about'
+    $about_query = new WP_Query( array(
+        'post_type' => 'landing_sections', // Проверь, как называется твой тип записи в functions.php!
+        'name'      => 'about'             // Ищем пост с ярлыком (slug) 'about'
+    ));
+
+    if ( $about_query->have_posts() ) :
+        while ( $about_query->have_posts() ) : $about_query->the_post();
+
+            // 2. Получаем все переменные заранее, чтобы код был чистым
+            $subtitle = get_post_meta( get_the_ID(), 'subtitle', true );
+            
+            $left_title = get_post_meta( get_the_ID(), 'col_left_title', true );
+            
+            $center_title = get_post_meta( get_the_ID(), 'col_center_title', true );
+            $photo_url = get_the_post_thumbnail_url( get_the_ID(), 'full' ); // Фото
+            
+            $right_title = get_post_meta( get_the_ID(), 'col_right_title', true );
+            $my_name = get_post_meta( get_the_ID(), 'my_name', true );
+            $right_text = get_post_meta( get_the_ID(), 'right_text', true );
+            
+            // Соцсети
+            $tg = get_post_meta( get_the_ID(), 'social_tg', true );
+            $git = get_post_meta( get_the_ID(), 'social_git', true );
+            $in = get_post_meta( get_the_ID(), 'social_in', true );
+            ?>
+
+            <div class="section_header">
+                <h2><?php the_title(); ?></h2> <?php if($subtitle): ?>
+                    <div class="s_descr_wrap">
+                        <div class="s_descr"><?php echo $subtitle; ?></div>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <div class="section_content">
+                <div class="container"> <div class="row"> <div class="col-md-4 col-left">
+                            <?php if($left_title): ?>
+                                <h3><?php echo $left_title; ?></h3>
+                            <?php endif; ?>
+                            
+                            <div class="left-text-content">
+                                <?php the_content(); ?> </div>
+                            
+                            <?php 
+                                // Пример: $skills = get_post_meta(get_the_ID(), 'skills', true);
+                            ?>
+                        </div>
+
+                        <div class="col-md-4 col-center person-photo">
+                            <?php if($center_title): ?>
+                                <h3><?php echo $center_title; ?></h3>
+                            <?php endif; ?>
+                            
+                            <?php if($photo_url): ?>
+                                <div class="photo-wrap">
+                                    <img src="<?php echo $photo_url; ?>" alt="<?php echo $my_name; ?>">
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="col-md-4 col-right">
+                            <?php if($right_title): ?>
+                                <h3><?php echo $right_title; ?></h3>
+                            <?php endif; ?>
+                            
+                            <?php if($my_name): ?>
+                                <h2 class="person-name"><?php echo $my_name; ?></h2>
+                            <?php endif; ?>
+                            
+                            <div class="right-text-content">
+                                <?php echo wpautop($right_text); // wpautop сохраняет абзацы из textarea ?>
+                            </div>
+
+                            <div class="social-icons">
+                                <ul>
+                                    <?php if($tg): ?>
+                                        <li><a href="<?php echo $tg; ?>" target="_blank"><i class="fa fa-telegram"></i></a></li>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($git): ?>
+                                        <li><a href="<?php echo $git; ?>" target="_blank"><i class="fa fa-github"></i></a></li>
+                                    <?php endif; ?>
+                                    
+                                    <?php if($in): ?>
+                                        <li><a href="<?php echo $in; ?>" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                    <?php endif; ?>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div> </div> </div>
+
+    <?php 
+        endwhile; 
+        wp_reset_postdata(); // Обязательно сбрасываем данные после кастомного запроса!
+    else : 
+        echo '<p>Создайте пост с названием "Обо мне" и слагом "about"</p>';
+    endif; 
+    ?>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<div class="section_header">
 			<h2>Обо мне</h2>
 			<div class="s_descr_wrap">
@@ -16,7 +131,14 @@
 			<div class="container">
 				<div class="row">
 
-					<!-- Photo About -->
+					<!-- Photo About 
+
+
+
+
+
+
+							
 
 					<div class="col-md-4 col-md-push-4 animation_1">
 						<h3>Фото</h3>
