@@ -4,9 +4,49 @@
 
 	<section id="about" class="s_about bg_light">
 
+		<?php 
+		// add type_post
+		$post_type  = 'Landing_sections';
 
+		// push four posts with they path
+		$post_header = get_page_by_path('about-header', OBJECT, $post_type);
+		$post_left   = get_page_by_path('about-left', OBJECT, $post_type);
+		$post_center = get_page_by_path('about-center', OBJECT, $post_type);
+		$post_right  = get_page_by_path('about-right', OBJECT, $post_type);
+		?>
 
+		<?php
+			$subtitle = get_post_meta($post_header->ID, 'subtitle', true);
+		?>
+		<div class="section_header">
+			<h2><?php echo get_the_title($post_header->ID); ?></h2>
+			<?php if($subtitle): ?>
+			<div class="s_descr_wrap">
+				<div class="s_descr">
+					<?php echo $subtitle; ?>	
+				</div>
+			</div>
+			<?php endif; ?>
+		</div>
+		<?php endif; ?>
 
+		<div class="section_content">
+			<div class="container">
+				<div class="row">
+					<?php if($post_center): ?>
+					<div class="col-md-4 col-md-push-4 animation_1">
+						<h3><?php echo get_the_title($post_center->ID); ?></h3>
+						<div class="person">
+							<?php $img_url = get_the_post_thumbnail_url($post_center->ID, 'full'); ?>
+							<a><img src="<?php echo $img_url; ?>" alt=" Andrii Diachenko"></a>
+						</div>
+					</div>
+					<?php endif; ?>
+
+					
+				</div>
+			</div>
+		</div>
 
 
 
