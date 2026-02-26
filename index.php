@@ -2,138 +2,137 @@
 
 <!-- Section About -->
 
-	<section id="about" class="s_about bg_light">
+<section id="about" class="s_about bg_light">
 
-		<?php 
-		// add type_post
-		$post_type  = 'Landing_sections';
+	<?php 
+	// add type_post
+	$post_type  = 'landing_sections';
 
-		// push four posts with they path
-		$post_header = get_page_by_path('about-header', OBJECT, $post_type);
-		$post_left   = get_page_by_path('about-left', OBJECT, $post_type);
-		$post_center = get_page_by_path('about-center', OBJECT, $post_type);
-		$post_right  = get_page_by_path('about-right', OBJECT, $post_type);
-		?>
+	// push four posts with they path
+	$post_header = get_page_by_path('about-header', OBJECT, $post_type);
+	$post_left   = get_page_by_path('about-left', OBJECT, $post_type);
+	$post_center = get_page_by_path('about-center', OBJECT, $post_type);
+	$post_right  = get_page_by_path('about-right', OBJECT, $post_type);
+	?>
 
-		<?php
-			$subtitle = get_post_meta($post_header->ID, 'subtitle', true);
-		?>
-		<div class="section_header">
-			<h2><?php echo get_the_title($post_header->ID); ?></h2>
-			<?php if($subtitle): ?>
-			<div class="s_descr_wrap">
-				<div class="s_descr">
-					<?php echo $subtitle; ?>	
-				</div>
+	<!-- Title Section About -->
+
+	<?php if($post_header):
+		$subtitle = get_post_meta($post_header->ID, 'subtitle', true);
+	?>
+	
+	<div class="section_header">
+		<h2><?php echo get_the_title($post_header->ID); ?></h2>
+		<?php if($subtitle): ?>
+		<div class="s_descr_wrap">
+			<div class="s_descr">
+				<?php echo $subtitle; ?>	
 			</div>
-			<?php endif; ?>
 		</div>
 		<?php endif; ?>
+	</div>
+	<?php endif; ?>
 
-		<div class="section_content">
-			<div class="container">
-				<div class="row">
-					<?php if($post_center): ?>
-					<div class="col-md-4 col-md-push-4 animation_1">
-						<h3><?php echo get_the_title($post_center->ID); ?></h3>
-						<div class="person">
-							<?php $img_url = get_the_post_thumbnail_url($post_center->ID, 'full'); ?>
-							<a><img src="<?php echo $img_url; ?>" alt=" Andrii Diachenko"></a>
-						</div>
+	<div class="section_content">
+		<div class="container">
+			<div class="row">
+				
+				<!-- Center Colum -->
+
+				<?php if($post_center): ?>
+				<div class="col-md-4 col-md-push-4 animation_1">
+					<h3><?php echo get_the_title($post_center->ID); ?></h3>
+					<div class="person">
+						<?php $img_url = get_the_post_thumbnail_url($post_center->ID, 'full'); ?>
+						<a><img src="<?php echo $img_url; ?>" alt=" Andrii Diachenko"></a>
 					</div>
+				</div>
+				<?php endif; ?>
+
+				<!-- Left Colum -->
+
+				<?php if($post_left):
+					// Custom field templates for skills
+					$expert_skills = get_post_meta($post_left->ID, 'expert_skills', true);
+					$basic_skills = get_post_meta($post_left->ID, 'basic_skills', true);
+					//  write here next skills
+				?>
+
+				<div class="col-md-4 col-md-pull-4 animation_2">
+					<h3><?php echo get_the_title($post_left->ID); ?></h3>
+
+					<?php echo apply_filters('the_content', $post_left->post_content); ?>
+					<p>
+						<?php if($expert_skills): ?>
+							<span style="color: #222;">Expert:</span> <span style="color: #4f88b4;"><?php echo $expert_skills; ?></span>;
+						<?php endif; ?>
+					</p>
+				</div>
+				<?php endif; ?>
+
+				<!-- Right Colum -->
+				
+				<?php if($post_right): 
+					$r_id = $post_right->ID;
+
+					// Make Fields
+					$h2_name  = get_post_meta($r_id, 'h2_name', true);
+					$birth    = get_post_meta($r_id, 'birth', true);
+					$phone    = get_post_meta($r_id, 'phone', true);
+					$email    = get_post_meta($r_id, 'email', true);
+					$git_link = get_post_meta($r_id, 'git_link', true);
+
+					// Social Fields
+					$tg =  get_post_meta($r_id, 'social_tg', true);
+					$git = get_post_meta($r_id, 'social_git', true);
+					$in  = get_post_meta($r_id, "social_in", true);
+				?>
+				<div class="col-md-4 animation_3 personal_last_block">
+					<h3><?php echo get_the_title($r_id); ?></h3>
+
+					<?php if($h2_name): ?>
+						<h2><?php echo $h2_name; ?></h2>
 					<?php endif; ?>
-
 					
-				</div>
-			</div>
-		</div>
+					<ul>
+						<li><?php echo esc_html($post_right->post_content); ?></li>
+						<?php if($birth): ?>
+							<li>Дата рождения: <?php echo $birth; ?></li>
+						<?php endif; ?>
 
-
-
-
-
-
-
-
-		<div class="section_header">
-			<h2>Обо мне</h2>
-			<div class="s_descr_wrap">
-				<div class="s_descr">КРАТКОЕ ОПИСАНИЕ</div>
-			</div>
-		</div>
-
-		<!-- Bootstrap -->
-
-		<div class="section_content">
-			<div class="container">
-				<div class="row">
-
-					<!-- Photo About 
-
-
-
-
-
-
-							
-
-					<div class="col-md-4 col-md-push-4 animation_1">
-						<h3>Фото</h3>
-						<div class="person">
-							<a><img src="img/myphoto/my_photo.jpg" alt="Alt" /></a>
-							<!-- Popup is here 
-							<a href="img/myphoto/photo.jpg" class="popup"><img src="img/myphoto/myphoto.jpg" alt="Alt" /></a>
-							-->
+						<div class="personal_info">
+							<?php if($phone): ?>
+								<li>Номер телефона: <span><?php echo $phone; ?></span></li>
+							<?php endif; ?>
+							<?php if($email): ?>
+								<li>E-mail: <a href="mailto:<?php echo $email; ?>"><span><?php echo $email; ?></span></a></li>
+							<?php endif; ?>
+							<?php if($git_link): ?>
+								<li>Git-page: <a href="<?php echo $git_link; ?>" target="_blank"><span><?php echo $git_link; ?></span></a></li>
+							<?php endif; ?>
 						</div>
-					</div>
+					</ul>
 
-					<!-- Left About -->
-
-					<div class="col-md-4 col-md-pull-4 animation_2">
-						<h3>Немного о себе</h3>
-						
-						<!-- <p>Развиваюсь в Web-разработке более 1 года. Преобрел отличный опыт в вестке сайтов, также постоянно практикую и развиваю свои навыки в данной области.</p> -->
-						<p>На протяжении нескольких лет я активно развиваюсь в области Web-разработки. За это время накопил значительный опыт в создании сайтов и веб-приложений, постоянно совершенствую навыки и углубляю знания в данной сфере.</p>
-						<p><span style="color: #222;">Expert:</span> <span style="color: #4f88b4;">CSS3</span>, <span style="color: #4f88b4;">HTML5</span>;
-						<br><span style="color: #222;">Basic:</span> <span style="color: #4f88b4;">Java Script</span>, <span style="color: #4f88b4;">Type Script</span>, <span style="color: #4f88b4;">Jquery</span>;
-						<br><span style="color: #222;">Uses:</span> <span style="color: #4f88b4;">Docker</span>, <span style="color: #4f88b4;">SQL</span>;
-						<br><span style="color: #222;">Framework:</span> <span style="color: #4f88b4;">Vue.js</span>;
-						<br><span style="color: #222;">Text Editors:</span> <span style="color: #4f88b4;">VSC</span>, <span style="color: #4f88b4;">Sublime Text</span>, <span style="color: #4f88b4;">PhpStorm</span>;
-						<br>В работе использую web-сервис для совместной IT-разработки<span style="color: #222;"> GitHub(Git)</span>;
-						<br>Обладаю опытом работы с <span style="color: #222;">CMS:</span> <span style="color: #4f88b4;">WordPress</span>;</p>
-						<p><span style="color: #222;">English level :</span> Pre-intermediate (B1).</p>
-					</div>
-
-					<!-- Right About -->
-
-					<div class="col-md-4 animation_3 personal_last_block">
-						<h3>Персональная информация</h3>
-						<h2>ANDRII DIACHENKO</h2>
+					<div class="social_wrap">
 						<ul>
-							<!-- <li>Желание быть частью большой команды, работа, старание и достижение карьерных  вершин главный приоритет который был поставлен мною. Я готов реализовать все вышеперечисленные качества в сфере ИТ.</li> -->
-							<li>Моим главным приоритетом всегда было стремление стать частью крупной команды, где работа, усердие и карьерный рост являются ключевыми ценностями. Готов реализовать свой потенциал и применить все вышеперечисленные качества в сфере Web-разработки.</li>
-							<li>Дата рождения: 03/02/1991</li>
-							<div class="personal_info">
-								<li>Номер телефона: <span>+3 8(093) 86 30 992</span></li>
-								<li>E-mail: <a href="mailto:diachenkonewwork@gmail.com"><span>diachenkonewwork@gmail.com</span></a></li>
-								<li>Git-page: <a href="https://github.com/Trikita73" target="_blank"><span>https://github.com/Trikita73</span></a></li>
-							</div>
+							<?php if($tg): ?>
+								<li title="telegram"><a href="<?php echo $tg; ?>" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
+							<?php endif; ?>
+							<?php if($git): ?>
+								<li title="github"><a href="<?php echo $git; ?>" target="_blank"><i class="fa fa-github"></i></a></li>
+							<?php endif; ?>
+							<?php if($in): ?>
+								<li title="linkedin"><a href="<?php echo $in; ?>" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+							<?php endif; ?>
 						</ul>
-
-						<!-- Social Club -->
-
-						<div class="social_wrap">
-							<ul>
-								<li title="telegram"><a href="https://t.me/Andrii_aka_Junior" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
-								<li title="github"><a href="https://github.com/Trikita73/" target="_blank"><i class="fa fa-github"></i></a></li>
-								<li title="linkedin"><a href="https://www.linkedin.com/in/andrii-diachenko-204752273/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-							</ul>
-						</div>
 					</div>
 				</div>
+				<?php endif; ?>
+				
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
 	<!-- Section Directions -->
 
