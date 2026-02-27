@@ -53,9 +53,25 @@
 
 				<?php if($post_left):
 					// Custom field templates for skills
-					$expert_skills = get_post_meta($post_left->ID, 'expert_skills', true);
-					$basic_skills = get_post_meta($post_left->ID, 'basic_skills', true);
-					//  write here next skills
+					$expert_skills       = get_post_meta($post_left->ID, 'expert_skills', true);
+					$basic_skills        = get_post_meta($post_left->ID, 'basic_skills', true);
+					$uses_skills         = get_post_meta($post_left->ID, 'uses_skills', true);
+					$framework_skills    = get_post_meta($post_left->ID, 'framework_skills', true);
+					$text_editors_skills = get_post_meta($post_left->ID, 'text_editors_skills', true);
+					$github_skills       = get_post_meta($post_left->ID, 'github_skills', true);
+					$wordpress_skills    = get_post_meta($post_left->ID, 'wordpress_skills', true);
+					$english_skills      = get_post_meta($post_left->ID, 'english_skills', true);
+
+					// Custom fielads templates for labels
+					$expert_labels       = get_post_meta($post_left->ID, 'expert_label', true);
+					$basic_labels        = get_post_meta($post_left->ID, 'basic_labels', true);
+					$uses_labels         = get_post_meta($post_left->ID, 'uses_labels', true);
+					$framework_labels    = get_post_meta($post_left->ID, 'framework_labels', true);
+					$text_editors_labels = get_post_meta($post_left->ID, 'text_editors_labels', true);
+					$web_service_labels  = get_post_meta($post_left->ID, 'web_service_labels', true);
+					$experience_labels   = get_post_meta($post_left->ID, 'experience_labels', true);
+
+					$english_labels      = get_post_meta($post_left->ID, 'english_labels', true);
 				?>
 
 				<div class="col-md-4 col-md-pull-4 animation_2">
@@ -64,7 +80,18 @@
 					<?php echo apply_filters('the_content', $post_left->post_content); ?>
 					<p>
 						<?php if($expert_skills): ?>
-							<span style="color: #222;">Expert:</span> <span style="color: #4f88b4;"><?php echo $expert_skills; ?></span>;
+							<span style="color: #222;"><?php echo $expert_labels; ?></span> <span style="color: #4f88b4;"><?php echo $expert_skills; ?></span>;
+							<br><span style="color: #222;"><?php echo $basic_labels; ?></span> <span style="color: #4f88b4;"><?php echo $basic_skills; ?></span>;
+							<br><span style="color: #222;"><?php echo $uses_labels; ?></span> <span style="color: #4f88b4;"><?php echo $uses_skills; ?></span>;
+							<br><span style="color: #222;"><?php echo $framework_labels; ?></span> <span style="color: #4f88b4;"><?php echo $framework_skills; ?></span>;
+							<br><span style="color: #222;"><?php echo $text_editors_labels; ?></span> <span style="color: #4f88b4;"><?php echo $text_editors_skills; ?></span>;
+							<br><?php echo $web_service_labels; ?> <span style="color: #222;"><?php echo $github_skills; ?></span>;
+							<br><?php echo $experience_labels; ?> <span style="color: #222;">CMS:</span> <span style="color: #4f88b4;"><?php echo $wordpress_skills; ?></span>;
+						<?php endif; ?>
+					</p>
+					<p>
+						<?php if($expert_skills): ?>
+							<span style="color: #222;"><?php echo $english_labels; ?></span> <?php echo $english_skills ?>.
 						<?php endif; ?>
 					</p>
 				</div>
