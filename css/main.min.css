@@ -397,6 +397,11 @@ body {
     margin-bottom:25px;
     font-size:15px
     }
+
+    .s_about .skill_list li  {
+        margin-bottom: 1px;
+        line-height: 1.45;
+    }
     
     .s_about ul,.s_about li {
     margin:0;
@@ -407,6 +412,18 @@ body {
     
     .s_about li {
     margin-bottom:10px
+    }
+
+    .s_about .text-dark {
+    color: #222;
+    }
+
+    .s_about .eng_dark {
+        color: #222;
+    }
+
+    .s_about .text-blue {
+    color: #4f88b4;
     }
     
     .s_about .social_wrap {

@@ -77,21 +77,45 @@
 				<div class="col-md-4 col-md-pull-4 animation_2">
 					<h3><?php echo get_the_title($post_left->ID); ?></h3>
 
-					<?php echo apply_filters('the_content', $post_left->post_content); ?>
-					<p>
+					<p><?php echo apply_filters('the_content', $post_left->post_content); ?></p>
+
+					<ul class="skill_list">
 						<?php if($expert_skills): ?>
-							<span style="color: #222;"><?php echo $expert_labels; ?></span> <span style="color: #4f88b4;"><?php echo $expert_skills; ?></span>;
-							<br><span style="color: #222;"><?php echo $basic_labels; ?></span> <span style="color: #4f88b4;"><?php echo $basic_skills; ?></span>;
-							<br><span style="color: #222;"><?php echo $uses_labels; ?></span> <span style="color: #4f88b4;"><?php echo $uses_skills; ?></span>;
-							<br><span style="color: #222;"><?php echo $framework_labels; ?></span> <span style="color: #4f88b4;"><?php echo $framework_skills; ?></span>;
-							<br><span style="color: #222;"><?php echo $text_editors_labels; ?></span> <span style="color: #4f88b4;"><?php echo $text_editors_skills; ?></span>;
-							<br><?php echo $web_service_labels; ?> <span style="color: #222;"><?php echo $github_skills; ?></span>;
-							<br><?php echo $experience_labels; ?> <span style="color: #222;"><?php echo $cms_labels; ?></span> <span style="color: #4f88b4;"><?php echo $wordpress_skills; ?></span>;
+							<li>
+								<span class="text-dark"><?php echo $expert_labels; ?></span>
+								<span class="text-blue"><?php echo $expert_skills; ?></span>
+							</li>
+							<li>
+								<span class="text-dark"><?php echo $basic_labels; ?></span>
+								<span class="text-blue"><?php echo $basic_skills; ?></span>
+							</li>
+							<li>
+								<span class="text-dark"><?php echo $uses_labels; ?></span>
+								<span class="text-blue"><?php echo $uses_skills; ?></span>
+							</li>
+							<li>
+								<span class="text-dark"><?php echo $framework_labels; ?></span>
+								<span class="text-blue"><?php echo $framework_skills; ?></span>
+							</li>
+							<li>
+								<span class="text-dark"><?php echo $text_editors_labels; ?></span>
+								<span class="text-blue"><?php echo $text_editors_skills; ?></span>
+							</li>
+							<li>
+								<span><?php echo $web_service_labels; ?></span>
+								<span class="text-dark"><?php echo $github_skills; ?></span>
+							</li>
+							<li>
+								<span><?php echo $experience_labels; ?></span>
+								<span class="text-dark"><?php echo $cms_labels; ?></span>
+								<span class="text-blue"><?php echo $wordpress_skills; ?></span>
+							</li>
 						<?php endif; ?>
-					</p>
+					</ul>
+					
 					<p>
 						<?php if($expert_skills): ?>
-							<span style="color: #222;"><?php echo $english_labels; ?></span> <?php echo $english_skills ?>.
+							<span class="eng_dark"><?php echo $english_labels; ?></span> <?php echo $english_skills ?>.
 						<?php endif; ?>
 					</p>
 				</div>
