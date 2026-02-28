@@ -70,7 +70,7 @@
 					$text_editors_labels = get_post_meta($post_left->ID, 'text_editors_labels', true);
 					$web_service_labels  = get_post_meta($post_left->ID, 'web_service_labels', true);
 					$experience_labels   = get_post_meta($post_left->ID, 'experience_labels', true);
-
+					$cms_labels          = get_post_meta($post_left->ID, 'cms_labels', true);
 					$english_labels      = get_post_meta($post_left->ID, 'english_labels', true);
 				?>
 
@@ -86,7 +86,7 @@
 							<br><span style="color: #222;"><?php echo $framework_labels; ?></span> <span style="color: #4f88b4;"><?php echo $framework_skills; ?></span>;
 							<br><span style="color: #222;"><?php echo $text_editors_labels; ?></span> <span style="color: #4f88b4;"><?php echo $text_editors_skills; ?></span>;
 							<br><?php echo $web_service_labels; ?> <span style="color: #222;"><?php echo $github_skills; ?></span>;
-							<br><?php echo $experience_labels; ?> <span style="color: #222;">CMS:</span> <span style="color: #4f88b4;"><?php echo $wordpress_skills; ?></span>;
+							<br><?php echo $experience_labels; ?> <span style="color: #222;"><?php echo $cms_labels; ?></span> <span style="color: #4f88b4;"><?php echo $wordpress_skills; ?></span>;
 						<?php endif; ?>
 					</p>
 					<p>
@@ -109,6 +109,12 @@
 					$email    = get_post_meta($r_id, 'email', true);
 					$git_link = get_post_meta($r_id, 'git_link', true);
 
+					// Custom Fileds for labels
+					$birth_labels    = get_post_meta($r_id, 'birth_labels', true);
+					$phone_labels    = get_post_meta($r_id, 'phone_labels', true);
+					$email_labels    = get_post_meta($r_id, 'email_labels', true);
+					$git_link_labels = get_post_meta($r_id, 'git_link_labels', true);
+
 					// Social Fields
 					$tg =  get_post_meta($r_id, 'social_tg', true);
 					$git = get_post_meta($r_id, 'social_git', true);
@@ -124,18 +130,18 @@
 					<ul>
 						<li><?php echo esc_html($post_right->post_content); ?></li>
 						<?php if($birth): ?>
-							<li>Дата рождения: <?php echo $birth; ?></li>
+							<li><?php echo $birth_labels; ?> <?php echo $birth; ?></li>
 						<?php endif; ?>
 
 						<div class="personal_info">
 							<?php if($phone): ?>
-								<li>Номер телефона: <span><?php echo $phone; ?></span></li>
+								<li><?php echo $phone_labels; ?> <span><?php echo $phone; ?></span></li>
 							<?php endif; ?>
 							<?php if($email): ?>
-								<li>E-mail: <a href="mailto:<?php echo $email; ?>"><span><?php echo $email; ?></span></a></li>
+								<li><?php echo $email_labels; ?> <a href="mailto:<?php echo $email; ?>"><span><?php echo $email; ?></span></a></li>
 							<?php endif; ?>
 							<?php if($git_link): ?>
-								<li>Git-page: <a href="<?php echo $git_link; ?>" target="_blank"><span><?php echo $git_link; ?></span></a></li>
+								<li><?php echo $git_link_labels; ?> <a href="<?php echo $git_link; ?>" target="_blank"><span><?php echo $git_link; ?></span></a></li>
 							<?php endif; ?>
 						</div>
 					</ul>
