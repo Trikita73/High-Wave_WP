@@ -193,13 +193,25 @@
 
 	<!-- Section Directions -->
 
-	<section id="directions" class="s_directions bg_direction" data-parallax="scroll" data-image-src="img/parallax/bg_parallax2.jpg">
+	<section id="directions" class="s_directions bg_dark" data-parallax="scroll" data-image-src="img/parallax/bg_parallax2.jpg"> // bg_direction -> bg_dark
+		
+		<?php
+		$post_type = 'landing_sections';
+		$tools_header = get_page_by_path('tools-header', OBJECT, $post_type);
+
+		if($tools_header):
+			$subtitle = get_post_meta($tools_header->ID, 'subtitle', true);
+		?>
+
 		<div class="section_header">
-			<h2>ИНСТРУМЕНТЫ</h2>
+			<h2><?php echo get_the_title($tools_header->ID); ?></h2>
+			<?php if($subtitle): ?>
 			<div class="s_descr_wrap">
-				<div class="s_descr">ИСПОЛЬЗУЕТСЯ В РАБОТЕ</div>
+				<div class="s_descr"><?php echo $subtitle; ?></div>
 			</div>
+			<?php endif; ?>
 		</div>
+		<?php endif; ?>
 
 		<!-- Container Section Directions -->
 
@@ -209,33 +221,6 @@
 					<div id="directions_grid">
 
 						<!-- Section Item Directions -->
-
-                        <?php 
-                            // Call function for category "direction"
-                            $directions = get_landing_items('directions');
-
-                            if ( $directions->have_posts() ) :
-                                while( $directions->have_posts() ) : $directions->the_post();
-                                // add picture
-                                $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-                        ?>
-                                <div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-                                    <img src="<?php echo $img; ?>" alt="<?php the_title(); ?>">
-                                    <div class = "mask">
-                                        <h2><?php the_title(); ?></h2>
-                                        <p><?php the_content(); ?></p>
-                                    </div>
-                                </div>
-
-                        <?php 
-                            endwhile;
-                            wp_reset_postdata(); // Обязательный сброс после цикла!
-                        endif;
-                        ?>
-
-
-
-                    
 
 						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
 							<img src="img/direction/d_ps.jpg" alt="Alt">
