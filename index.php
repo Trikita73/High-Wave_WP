@@ -191,239 +191,89 @@
 	</div>
 </section>
 
-	<!-- Section Directions -->
+<!-- Section Directions -->
 
-	<section id="directions" class="s_directions bg_dark" data-parallax="scroll" data-image-src="img/parallax/bg_parallax2.jpg"> // bg_direction -> bg_dark
-		
-		<?php
-		$post_type = 'landing_sections';
-		$tools_header = get_page_by_path('tools-header', OBJECT, $post_type);
+<section id="directions" class="s_directions bg_dark" data-parallax="scroll" data-image-src="img/parallax/bg_parallax2.jpg"> // bg_direction -> bg_dark
+	
+	<?php
+	$post_type = 'landing_sections';
+	$tools_header = get_page_by_path('tools-header', OBJECT, $post_type);
 
-		if($tools_header):
-			$subtitle = get_post_meta($tools_header->ID, 'subtitle', true);
-		?>
+	if($tools_header):
+		$subtitle = get_post_meta($tools_header->ID, 'subtitle', true);
+	?>
 
-		<div class="section_header">
-			<h2><?php echo get_the_title($tools_header->ID); ?></h2>
-			<?php if($subtitle): ?>
-			<div class="s_descr_wrap">
-				<div class="s_descr"><?php echo $subtitle; ?></div>
-			</div>
-			<?php endif; ?>
+	<!-- Title Section About -->
+
+	<div class="section_header">
+		<h2><?php echo get_the_title($tools_header->ID); ?></h2>
+		<?php if($subtitle): ?>
+		<div class="s_descr_wrap">
+			<div class="s_descr"><?php echo $subtitle; ?></div>
 		</div>
 		<?php endif; ?>
+	</div>
+	<?php endif; ?>
 
-		<!-- Container Section Directions -->
+	<!-- Container Section Directions -->
 
-		<div class="section_content">
-			<div class="container">
-				<div class="row">
-					<div id="directions_grid">
+	<div class="section_content">
+		<div class="container">
+			<div class="row">
+				<div id="directions_grid">
 
-						<!-- Section Item Directions -->
+					<!-- Section Item Directions -->
 
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_ps.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Web-Дизайн</h2>
-								<p>Работа с шаблонами которые разработаны в:</p>
-								<ul>
-									<li>- Figma</li>
-									<li>- PhotoShop</li>
-								</ul>	
-							</div>
+					<?php
+					$tools_query = new WP_Query(array(
+						'post_type' => $post_type,
+						'category_name' => 'tools',
+						'post_per_page' => -1
+					));
+
+					// Start The Cycle
+					if ($tools_query->have_posts()) :
+						while ($tools_query->have_posts()) : $tools_query->the_post();
+					?>
+
+					<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
+
+						<?php
+						// Get The Photo
+						$img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+						if($img_url): ?>
+							<img src="<?php echo $img_url ?>" alt="<?php the_title(); ?>">
+						<?php endif; ?>
+
+						<div class="mask">
+							<h2><?php the_title(); ?></h2>
+							<p><?php echo strip_tags(get_the_content()); ?></p>
+							<ul>
+								<?php
+								for ($i = 1; $i <= 5; $i++) {
+									$list_item = get_post_meta(get_the_ID(), 'list_item_' . $i, true);
+									// if field is filled - display <li>
+									if($list_item) {
+										echo '<li>- ' . esc_html($list_item). '<li>';
+									}
+								}
+								?>
+								
+							</ul>	
 						</div>
+					</div>
 
-						<!-- Section Item Directions -->
+					<?php
+						endwhile;
+						wp_reset_postdata();  // Reset the data after loop!
+					endif;
+					?>
 
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_git.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Git</h2>
-								<p>Работа с репозиториями, используя команды:</p>	
-								<ul>
-									<li>- Push</li>
-									<li>- Branch</li>
-									<li>- Merge</li>
-									<li>- Rebase</li>
-									<li>- Cherry-pick</li>
-								</ul>
-							</div>
-						</div>	
- 
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_html.jpg" alt="Alt">
-							<div class="mask">
-								<h2>HTML</h2>
-								<p>Верстка и применение инструментов web-разработки:</p>	
-								<ul>
-									<li>- Emmet</li>
-									<li>- HTML</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_wp.jpg" alt="Alt">
-							<div class="mask">
-								<h2>WordPress</h2>
-								<p>СMS с открытым исходным кодом. Основные шаги:</p>
-								<ul>
-									<li>- Разбивка HTML шаблона</li>
-									<li>- Конвертация (HTML -> PHP)</li>
-									<li>- Интеграция: кода в темы</li>
-									<li>- Настройка: стилей и функций</li>
-									<li>- Тестирование: шаблона</li>
-								</ul>	
-							</div>
-						</div>
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_vue.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Vue.js</h2>
-								<p>JS-фреймворк для создания пользовательских интерфейсов включает в себя:</p>	
-								<ul>
-									<li>- Однофайловые компоненты (SFC)</li>
-									<li>- Жизненный цикл компонентов</li>
-									<li>- Работа с данными</li>
-									<li>- Асинхронные запросы</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_docker.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Docker</h2>
-								<p>Docker — платформа для контейнеризации приложений, основные функции:</p>	
-								<ul>
-									<li>- Docker Engine</li>
-									<li>- DockerFile</li>
-									<li>- Docker Image</li>
-									<li>- Docker Container</li>
-								</ul>
-							</div>
-						</div>
-
-						<!--
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth">
-							<img src="img/direction/d_react.jpg" alt="Alt">
-							<div class="mask">
-								<h2>React.js</h2>
-								<p>JavaScript-библиотека с открытым исходным кодом для разработки пользовательских интерфейсов.</p>	
-							</div>
-						</div>
-
-						-->
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_css.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Css</h2>
-								<p>Cascading Style Sheets - отвечает за описание внешнего вида HTML, содержит:</p>	
-								<ul>
-									<li>- Flexbox</li>
-									<li>- Grid</li>
-									<li>- Sass/Less</li>
-									<li>- Селекторы</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_js.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Java Script</h2>
-								<p>Язык программирования, для создания web-страниц обладает:</p>	
-								<ul>
-									<li>- for()...While()</li>
-									<li>- Function</li>
-									<li>- Array</li>
-									<li>- DOM</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_ts.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Type Script</h2>
-								<p>Язык программирования добавляет дополнительную функциональность в JS, используя:</p>	
-								<ul>
-									<li>- Data types</li>
-									<li>- Interfaces</li>
-									<li>- Generics</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_jquery.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Jquery</h2>
-								<p>Библиотека JS разработанная для упрощения работы с DOM и обработкой CSS, включает:</p>	
-								<ul>
-									<li>- Селекторы jQuery</li>
-									<li>- Обработчики событий</li>
-									<li>- Эффекты и анимации</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_mysql.jpg" alt="Alt">
-							<div class="mask">
-								<h2>SQL</h2> 
-								<p>Предназначен для управления базами данных, обладает функциями:</p>	
-								<ul>
-									<li>- Create</li>
-									<li>- Read</li>
-									<li>- Update</li>
-									<li>- Delete</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Section Item Directions -->
-
-						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item direction_item view view-fifth opacity_dir">
-							<img src="img/direction/d_node.jpg" alt="Alt">
-							<div class="mask">
-								<h2>Node.js</h2>
-								<p>Платформа для использования JS на стороне сервера, компоненты:</p>	
-								<ul>
-									<li>- Менеджер пакетов npm</li>
-									<li>- Фреймворки и библиотеки</li>
-									<li>- Базы данных</li>
-									<li>- Инструменты для разработки</li>
-								</ul>
-							</div>
-						</div>
-					</div>	
-				</div>
+				</div>	
 			</div>
-		</div>			
-	</section>
+		</div>
+	</div>			
+</section>
 
 	<!-- Section Resume -->
 
