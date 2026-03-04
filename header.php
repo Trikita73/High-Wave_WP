@@ -23,7 +23,7 @@
 
 	<!-- Header + Effect Parallax -->
 
-	<header class="main_head main_color_bg" data-parallax="scroll" data-image-src="<?php echo get_template_directory_uri(); ?>/img/header/header.jpg" data-z-index="1">
+	<header class="main_head main_color_bg" data-parallax="scroll" data-image-src="/img/header/header.jpg" data-z-index="1">
 
 		<!-- Logo Inkscape -->
 

@@ -246,3 +246,11 @@ $(window).on("resize", centerTopMenu);
 $(window).on("load", centerTopMenu);
 
 
+// Launch parallax
+$(document).ready(function() {
+	// Call plagin (../MyParallax/jquery.myParallax.js) for section "Direction"
+	$("#directions").myParallax({
+		"speed" : "29"
+	});
+});
+

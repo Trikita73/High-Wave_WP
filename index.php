@@ -1,10 +1,8 @@
 <?php get_header(); ?>
 
-<!-- Section About -->
+<!-- Data for Section About -->
 
-<section id="about" class="s_about bg_light">
-
-	<?php 
+<?php 
 	// add type_post
 	$post_type  = 'landing_sections';
 
@@ -13,13 +11,17 @@
 	$post_left   = get_page_by_path('about-left', OBJECT, $post_type);
 	$post_center = get_page_by_path('about-center', OBJECT, $post_type);
 	$post_right  = get_page_by_path('about-right', OBJECT, $post_type);
-	?>
+?>
+
+<?php if($post_header):
+	$subtitle = get_post_meta($post_header->ID, 'subtitle', true);
+?>
+
+<!-- Section About -->
+
+<section id="about" class="s_about bg_light">
 
 	<!-- Title Section About -->
-
-	<?php if($post_header):
-		$subtitle = get_post_meta($post_header->ID, 'subtitle', true);
-	?>
 	
 	<div class="section_header">
 		<h2><?php echo get_the_title($post_header->ID); ?></h2>
@@ -191,19 +193,30 @@
 	</div>
 </section>
 
-<!-- Section Directions -->
+<!-- Data for Section Directions -->
 
-<section id="directions" class="s_directions bg_dark" data-parallax="scroll" data-image-src="img/parallax/bg_parallax2.jpg"> // bg_direction -> bg_dark
-	
-	<?php
+<?php
+	// Get data posts for header and background 
 	$post_type = 'landing_sections';
 	$tools_header = get_page_by_path('tools-header', OBJECT, $post_type);
 
-	if($tools_header):
-		$subtitle = get_post_meta($tools_header->ID, 'subtitle', true);
-	?>
+	// Template under photo-link 
+	$parallax_img_url = ''; 
 
-	<!-- Title Section About -->
+	if($tools_header):
+
+		// Take URL photo (Featured Image)
+		$parallax_img_url = get_the_post_thumbnail_url($tools_header->ID, 'full');
+
+		// Get subtitle
+		$subtitle = get_post_meta($tools_header->ID, 'subtitle', true);
+?>
+
+<!-- Section Directions -->
+
+<section id="directions" class="s_directions bg_direction" data-parallax="scroll" data-parallax-image="<?php echo $parallax_img_url; ?>"> 
+	
+	<!-- Title Section Directions -->
 
 	<div class="section_header">
 		<h2><?php echo get_the_title($tools_header->ID); ?></h2>
