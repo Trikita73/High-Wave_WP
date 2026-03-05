@@ -891,6 +891,7 @@ body {
 
 #directions_grid .mix {
  display: block !important; /* элементы всегда видны */
+ padding: inherit;
 }
 
 /* Fix for Parallax */

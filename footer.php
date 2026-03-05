@@ -13,7 +13,7 @@
 						</script>  
 
 						<!--ANDRII DIACHENKO-->
-						A.D.
+						Andrii D.
 					</div>
 					
 					<!-- Social -->

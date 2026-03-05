@@ -196,6 +196,7 @@
 <!-- Data for Section Directions -->
 
 <?php
+
 	// Get data posts for header and background 
 	$post_type = 'landing_sections';
 	$tools_header = get_page_by_path('tools-header', OBJECT, $post_type);
@@ -212,7 +213,7 @@
 		$subtitle = get_post_meta($tools_header->ID, 'subtitle', true);
 ?>
 
-<!-- Section Directions -->
+<!-- Section Directions --> 
 
 <section id="directions" class="s_directions bg_direction" data-parallax="scroll" data-parallax-image="<?php echo $parallax_img_url; ?>"> 
 	
@@ -227,8 +228,6 @@
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
-
-	<!-- Container Section Directions -->
 
 	<div class="section_content">
 		<div class="container">
@@ -288,55 +287,82 @@
 	</div>			
 </section>
 
+	<!-- Data for Section Resume -->
+
+	<?php
+
+		$post_type = 'landing_sections';
+
+		$resume_header      = get_page_by_path('resume-header', OBJECT, $post_type);
+		$resume_work_title  = get_page_by_path('resume-work-title', OBJECT, $post_type);
+		$resume_study_title = get_page_by_path('resume-study-title', OBJECT, $post_type);
+	?>
+
+	<?php if($resume_header):
+		$subtitle = get_post_meta($resume_header->ID, 'subtitle', true);
+	?>
+
 	<!-- Section Resume -->
 
 	<section id="resume" class="s_resume">
-		<div class="section_header">
-			<h2>Резюме</h2>
-			<div class="s_descr_wrap">
-				<div class="s_descr">Мои знания и достижения</div>
-			</div>
-		</div>
 
-		<!-- /// -->
+		<!-- Title Section Directions -->
+
+		<div class="section_header">
+			<h2><?php echo get_the_title($resume_header->ID); ?></h2>
+			<?php if($subtitle): ?>
+			<div class="s_descr_wrap">
+				<div class="s_descr"><?php echo $subtitle; ?></div>
+			</div>
+			<?php endif; ?>
+		</div>
+		<?php endif; ?>
 
 		<div class="section_content">
 			<div class="container">
 				<div class="row">
 
-					<!-- Icon -->
+					<!-- Icon Left Size -->
 
 					<div class="resume_container">
 						<div class="col-md-6 col-sm-6 left">
-							<h3>Работа</h3>
+							<?php if($resume_work_title): ?>
+								<h3><?php echo get_the_title($resume_work_title->ID); ?></h3>
+							<?php endif; ?>
 							<div class="resume_icon"><i class="icon-basic-display"></i></div>
 
-							<?php
-								$work_items = get_landing_items('resume_work'); 
-								if($work_items->have_posts()): while($work_items->have_posts()): $work_items->the_post();
-								// add fields
-								$year = get_post_meta(get_the_ID(), 'year', true);
-								$position = get_post_meta( get_the_ID(), 'position', true);
-							?>
-								<!-- Left Side Resume -->
-								<div class="resume_item">
-									<div class="year"><?php echo $year; ?></div>
-									<div class="resume_description">
-										<?php the_title(); ?><strong><?php echo $position; ?></strong>
-										<p><?php the_content(); ?></p>
-									</div>
-								</div>
-							<?php endwhile; wp_reset_postdata(); endif; ?>
-
-
-
 							<!-- Left Side Resume -->
+
+							<?php
+							
+								$work_query = new WP_Query(array(
+									'post_type'     => $post_type,
+									'category_name' => 'resume-work',
+									'posts_per_page' => -1
+								));
+
+								if ($work_query->have_posts() ):
+									while ($work_query->have_posts() ): $work_query->the_post();
+										// get custom fields
+										$year    = get_post_meta(get_the_ID(), 'year', true);
+										$company = get_post_meta(get_the_ID(), 'company', true);							
+							?>
+									
 							<div class="resume_item">
-								<div class="year">2021-2022</div>
-								<div class="resume_description">"TGI Solution"<strong>Front-End</strong>
-									<p>В компании <a href="https://tgi-it.com/">TGI Intelligent Solution</a> - cоздавал новые сайты с нуля на основе макетов, а так же вносил правки в сущевствующие проекты, работал над оптимизацией скорости загрузки сайтов и создание плагинов для автоматизации и удобства работ с контентом.</p>
+								<div class="year"><?php echo esc_html($year); ?></div>
+								<div class="resume_description">
+									<?php echo esc_html($company); ?><strong><?php the_title(); ?></strong>
+									<p><?php the_content(); ?></p>
 								</div>
 							</div>
+							<?php
+								endwhile;
+								wp_reset_postdata();
+							endif;
+							?>
+
+
+
 							<div class="resume_item">
 								<div class="year">2020-2021</div>
 								<div class="resume_description">"Sanjes"<strong>Chat Operator</strong>
@@ -363,35 +389,46 @@
 							</div>
 						</div>
 
-						<!-- Icon -->
+						<!-- Icon Right Size -->
 
 						<div class="col-md-6 col-sm-6 right">
-							<h3>Учеба</h3>
+							<?php if($resume_study_title): ?>
+								<h3><?php echo get_the_title($resume_study_title->ID); ?></h3>
+							<?php endif; ?>
 							<div class="resume_icon"><i class="icon-basic-spread-text"></i></div>
 
+							<!-- Right Side Resume -->
+
 							<?php
-								$study_items = get_landing_items('resume_study');
-								if($study_items->have_posts()): while($study_items->have_posts()): $study_items->the_post();
-									$year = get_post_meta(get_the_ID(), 'year', true);
-									$position = get_post_meta(get_the_ID(), 'position', true);
+							
+								$study_query = new WP_Query(array(
+									'post_type'      => $post_type,
+									'category_name'  => 'resume-study',
+									'posts_per_page'  => -1
+								));
+
+								if($study_query->have_posts() ):
+									while($study_query->have_posts() ): $study_query->the_post();
+										// get custom fields
+										$year    = get_post_meta(get_the_ID(), 'year', true);
+										$company = get_post_meta(get_the_ID(), 'company', true);
 							?>
 
-								<div class="resume_item">
-									<div class="year"><?php echo $year; ?></div>
-									<div class="resume_description">
-										<strong><?php echo $position; ?></strong><?php the_title(); ?>
-										<?php the_content(); ?>
-									</div>
-								</div>
-							<?php endwhile; wp_reset_postdata(); endif; ?>
-
-							<!-- Right Side Resume -->
 							<div class="resume_item">
-								<div class="year">2022-2024</div>
-								<div class="resume_description"><strong>Skills Boots</strong>"Google Cloud"
-									<p>Закончил серию курсов <a href="https://www.cloudskillsboost.google/profile/badges/">Google Cloud Skills Boost</a>, получил опыт в таких направлениях как: Machine Learning, Artificial Intelligence, Data Cloud, работал с Cloud SQL, разрабатывал Web-caйты и приложения на основе Google Cloud.</p>
+								<div class="year"><?php echo esc_html($year); ?></div>
+								<div class="resume_description">
+									<strong><?php echo esc_html($company); ?></strong><?php the_title(); ?>
+									<p><?php the_content(); ?></p>
 								</div>
 							</div>
+							<?php
+								endwhile;
+								wp_reset_postdata();
+							endif;
+							?>
+
+
+
 							<div class="resume_item">
 								<div class="year">2020-2021</div>
 								<div class="resume_description"><strong>IT</strong>"Learn.Javascript"
