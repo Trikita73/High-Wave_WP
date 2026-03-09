@@ -287,178 +287,124 @@
 	</div>			
 </section>
 
-	<!-- Data for Section Resume -->
+<!-- Data for Section Resume -->
 
-	<?php
+<?php
 
-		$post_type = 'landing_sections';
+	$post_type = 'landing_sections';
 
-		$resume_header      = get_page_by_path('resume-header', OBJECT, $post_type);
-		$resume_work_title  = get_page_by_path('resume-work-title', OBJECT, $post_type);
-		$resume_study_title = get_page_by_path('resume-study-title', OBJECT, $post_type);
-	?>
+	$resume_header      = get_page_by_path('resume-header', OBJECT, $post_type);
+	$resume_work_title  = get_page_by_path('resume-work-title', OBJECT, $post_type);
+	$resume_study_title = get_page_by_path('resume-study-title', OBJECT, $post_type);
+?>
 
-	<?php if($resume_header):
-		$subtitle = get_post_meta($resume_header->ID, 'subtitle', true);
-	?>
+<?php if($resume_header):
+	$subtitle = get_post_meta($resume_header->ID, 'subtitle', true);
+?>
 
-	<!-- Section Resume -->
+<!-- Section Resume -->
 
-	<section id="resume" class="s_resume">
+<section id="resume" class="s_resume">
 
-		<!-- Title Section Directions -->
+	<!-- Title Section Directions -->
 
-		<div class="section_header">
-			<h2><?php echo get_the_title($resume_header->ID); ?></h2>
-			<?php if($subtitle): ?>
-			<div class="s_descr_wrap">
-				<div class="s_descr"><?php echo $subtitle; ?></div>
-			</div>
-			<?php endif; ?>
+	<div class="section_header">
+		<h2><?php echo get_the_title($resume_header->ID); ?></h2>
+		<?php if($subtitle): ?>
+		<div class="s_descr_wrap">
+			<div class="s_descr"><?php echo $subtitle; ?></div>
 		</div>
 		<?php endif; ?>
+	</div>
+	<?php endif; ?>
 
-		<div class="section_content">
-			<div class="container">
-				<div class="row">
+	<div class="section_content">
+		<div class="container">
+			<div class="row">
 
-					<!-- Icon Left Size -->
+				<!-- Icon Left Size -->
 
-					<div class="resume_container">
-						<div class="col-md-6 col-sm-6 left">
-							<?php if($resume_work_title): ?>
-								<h3><?php echo get_the_title($resume_work_title->ID); ?></h3>
-							<?php endif; ?>
-							<div class="resume_icon"><i class="icon-basic-display"></i></div>
+				<div class="resume_container">
+					<div class="col-md-6 col-sm-6 left">
+						<?php if($resume_work_title): ?>
+							<h3><?php echo get_the_title($resume_work_title->ID); ?></h3>
+						<?php endif; ?>
+						<div class="resume_icon"><i class="icon-basic-display"></i></div>
 
-							<!-- Left Side Resume -->
+						<!-- Left Side Resume -->
 
-							<?php
-							
-								$work_query = new WP_Query(array(
-									'post_type'     => $post_type,
-									'category_name' => 'resume-work',
-									'posts_per_page' => -1
-								));
+						<?php
+						
+							$work_query = new WP_Query(array(
+								'post_type'     => $post_type,
+								'category_name' => 'resume_work',
+								'posts_per_page' => -1
+							));
 
-								if ($work_query->have_posts() ):
-									while ($work_query->have_posts() ): $work_query->the_post();
-										// get custom fields
-										$year    = get_post_meta(get_the_ID(), 'year', true);
-										$company = get_post_meta(get_the_ID(), 'company', true);							
-							?>
-									
-							<div class="resume_item">
-								<div class="year"><?php echo esc_html($year); ?></div>
-								<div class="resume_description">
-									<?php echo esc_html($company); ?><strong><?php the_title(); ?></strong>
-									<p><?php the_content(); ?></p>
-								</div>
-							</div>
-							<?php
-								endwhile;
-								wp_reset_postdata();
-							endif;
-							?>
-
-
-
-							<div class="resume_item">
-								<div class="year">2020-2021</div>
-								<div class="resume_description">"Sanjes"<strong>Chat Operator</strong>
-									<p>Занимался раскруткой аккаунтов и продвижением, в мои обязанности входил контроль и сортировка чатов, наполнение новым контентом, SFS реклама.</p>
-								</div>
-							</div>
-							<div class="resume_item">
-								<div class="year">2018-2020</div>
-								<div class="resume_description">"Happy People Agency"<strong>TRANSLATOR</strong>
-									<p>Работал переводчиком в агентстве знакомств. Повысил свои навыки в области английского языка и освоил навыки правильной организации  взаимодействия  в коллективе.</p>
-								</div>
-							</div>
-							<div class="resume_item">
-								<div class="year">2016-2018</div>
-								<div class="resume_description">"Free Lance"<strong>FRONT-END</strong>
-									<p>Занимался разработкой сайтов на заказ, делал сайты визитки, промо сайты, интернет магазин.</p>
-								</div>
-							</div>
-							<div class="resume_item">
-								<div class="year">2016-2017</div>
-								<div class="resume_description">"MonsterLids.pro"<strong>SUPPORT</strong>
-									<p>Работал в отделе поддержки веб-мастеров в CPA-сети. Получил хороший опыт работы с партнерской программой и навыки общения с веб-мастерами, а также приобрел навыки взаимодействия работы в коллективе.</p>
-								</div>
+							if ($work_query->have_posts() ):
+								while ($work_query->have_posts() ): $work_query->the_post();
+									// get custom fields
+									$resume_year    = get_post_meta(get_the_ID(), 'resume_year', true);
+									$resume_company = get_post_meta(get_the_ID(), 'resume_company', true);							
+						?>
+								
+						<div class="resume_item">
+							<div class="year"><?php echo esc_html($resume_year); ?></div>
+							<div class="resume_description">
+								<?php echo esc_html($resume_company); ?><strong><?php the_title(); ?></strong>
+								<p><?php the_content(); ?></p>
 							</div>
 						</div>
+						<?php
+							endwhile;
+							wp_reset_postdata();
+						endif;
+						?>						
+					</div>
 
-						<!-- Icon Right Size -->
+					<!-- Icon Right Size -->
 
-						<div class="col-md-6 col-sm-6 right">
-							<?php if($resume_study_title): ?>
-								<h3><?php echo get_the_title($resume_study_title->ID); ?></h3>
-							<?php endif; ?>
-							<div class="resume_icon"><i class="icon-basic-spread-text"></i></div>
+					<div class="col-md-6 col-sm-6 right">
+						<?php if($resume_study_title): ?>
+							<h3><?php echo get_the_title($resume_study_title->ID); ?></h3>
+						<?php endif; ?>
+						<div class="resume_icon"><i class="icon-basic-spread-text"></i></div>
 
-							<!-- Right Side Resume -->
+						<!-- Right Side Resume -->
 
-							<?php
-							
-								$study_query = new WP_Query(array(
-									'post_type'      => $post_type,
-									'category_name'  => 'resume-study',
-									'posts_per_page'  => -1
-								));
+						<?php
+						
+							$study_query = new WP_Query(array(
+								'post_type'      => $post_type,
+								'category_name'  => 'resume_study',
+								'posts_per_page'  => -1
+							));
 
-								if($study_query->have_posts() ):
-									while($study_query->have_posts() ): $study_query->the_post();
-										// get custom fields
-										$year    = get_post_meta(get_the_ID(), 'year', true);
-										$company = get_post_meta(get_the_ID(), 'company', true);
-							?>
+							if($study_query->have_posts() ):
+								while($study_query->have_posts() ): $study_query->the_post();
+									// get custom fields
+									$resume_year    = get_post_meta(get_the_ID(), 'resume_year', true);
+									$resume_study = get_post_meta(get_the_ID(), 'resume_study', true);
+						?>
 
-							<div class="resume_item">
-								<div class="year"><?php echo esc_html($year); ?></div>
-								<div class="resume_description">
-									<strong><?php echo esc_html($company); ?></strong><?php the_title(); ?>
-									<p><?php the_content(); ?></p>
-								</div>
-							</div>
-							<?php
-								endwhile;
-								wp_reset_postdata();
-							endif;
-							?>
-
-
-
-							<div class="resume_item">
-								<div class="year">2020-2021</div>
-								<div class="resume_description"><strong>IT</strong>"Learn.Javascript"
-									<p>Прошел базовый курс <a href="https://github.com/Trikita73/jsbasic-20210225_dyachenkoandrii/">JavaScript</a>, изучал: основы DOM-модель, основы ООП, объекты, функции и массивы, основы обмена данными с сервером в формате JSON.</p>
-								</div>
-							</div>
-							<div class="resume_item">
-								<div class="year">2018-2020</div>
-								<div class="resume_description"><strong>ENGLISH</strong>"Duoliongo"
-									<p>Изучаю английский язык на образовательной платформе, Duoliongo. Прошел полный курс и продолжаю совершенствовать свои знания в области изучения английского языка.</p>
-								</div>
-							</div>
-							<div class="resume_item">
-								<div class="year">2013-2016</div>
-								<div class="resume_description"><strong>ІПСА</strong>НТТУ "КПИ"
-									<p>Получил базовое высшее образование “бакалавр” в области компьютерные науки на заочной форме обучения.</p>
-								</div>
-							</div>
-							<div class="resume_item">
-								<div class="year">2009-2015</div>
-								<div class="resume_description"><strong>ТЕФ</strong>НТТУ "КПИ"
-									<p>Получил высшее образование в области Тепловых и Атомных станций. Имею диплом бакалавра и специалиста, за шесть лет учебы в Киевском Политехническом Институте получил хорошую базу инженерных знаний и практических умений.</p>
-								</div>
+						<div class="resume_item">
+							<div class="year"><?php echo esc_html($resume_year); ?></div>
+							<div class="resume_description">
+								<strong><?php echo esc_html($resume_study); ?></strong><?php the_title(); ?>
+								<p><?php the_content(); ?></p>
 							</div>
 						</div>
+						<?php
+							endwhile;
+							wp_reset_postdata();
+						endif;
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 				
 	<!-- Section Portfolio -->
 
