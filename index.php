@@ -79,7 +79,7 @@
 				<div class="col-md-4 col-md-pull-4 animation_2">
 					<h3><?php echo get_the_title($post_left->ID); ?></h3>
 
-					<p><?php echo apply_filters('the_content', $post_left->post_content); ?></p>
+					<?php echo apply_filters('the_content', $post_left->post_content); ?>
 
 					<ul class="skill_list">
 						<?php if($expert_skills): ?>
@@ -238,9 +238,12 @@
 
 					<?php
 					$tools_query = new WP_Query(array(
-						'post_type' => $post_type,
-						'category_name' => 'tools',
-						'post_per_page' => -1
+						'post_type'      => $post_type,
+						'category_name'  => 'tools',
+						'posts_per_page' => -1,
+						'orderby'        => 'menu_order',
+						'order'          => 'ASC',
+						'post__not_in'   => array($tools_header->ID)
 					));
 
 					// Start The Cycle
@@ -336,9 +339,11 @@
 						<?php
 						
 							$work_query = new WP_Query(array(
-								'post_type'     => $post_type,
-								'category_name' => 'resume_work',
-								'posts_per_page' => -1
+								'post_type'      => $post_type,
+								'category_name'  => 'resume_work',
+								'posts_per_page' => -1,
+								'orderby'        => 'menu_order',
+								'order'          => 'ASC'
 							));
 
 							if ($work_query->have_posts() ):
@@ -352,7 +357,7 @@
 							<div class="year"><?php echo esc_html($resume_year); ?></div>
 							<div class="resume_description">
 								<?php echo esc_html($resume_company); ?><strong><?php the_title(); ?></strong>
-								<p><?php the_content(); ?></p>
+								<?php the_content(); ?>
 							</div>
 						</div>
 						<?php
@@ -375,9 +380,11 @@
 						<?php
 						
 							$study_query = new WP_Query(array(
-								'post_type'      => $post_type,
-								'category_name'  => 'resume_study',
-								'posts_per_page'  => -1
+								'post_type'       => $post_type,
+								'category_name'   => 'resume_study',
+								'posts_per_page'  => -1,
+								'orderby'         => 'menu_order',
+								'order'            => 'ASC'
 							));
 
 							if($study_query->have_posts() ):
@@ -390,8 +397,8 @@
 						<div class="resume_item">
 							<div class="year"><?php echo esc_html($resume_year); ?></div>
 							<div class="resume_description">
-								<strong><?php echo esc_html($resume_study); ?></strong><?php the_title(); ?>
-								<p><?php the_content(); ?></p>
+								<strong><?php the_title(); ?></strong><?php echo esc_html($resume_study); ?>
+								<?php the_content(); ?>
 							</div>
 						</div>
 						<?php
