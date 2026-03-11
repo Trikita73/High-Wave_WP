@@ -412,16 +412,42 @@
 		</div>
 	</div>
 </section>
+
+<!-- Data for Section Portfolio -->
+
+<?php
+	$post_type = 'landing_sections';
+
+	// get data for header and background
+	$portfolio_header = get_page_by_path('portfolio-header', OBJECT, $post_type);
+	
+	$parallax_bg_url = '';
+	$header_subtitle = '';
+
+	$filter_all = $filter_cat1 = $filter_cat2 = $filter_cat_3 = '';
+
+	if($portfolio_header) {
+		$parallax_bg_url = get_the_post_thumbnail_url($portfolio_header->ID, 'fill');
+		$header_subtitle = get_post_meta($portfolio_header->ID, 'subtitle', true);
+	}
+?>
 				
 	<!-- Section Portfolio -->
 
-	<section id="portfolio" class="s_portfolio bg_dark" data-parallax-image="img/parallax/bg_parallax.jpg">
+	<section id="portfolio" class="s_portfolio bg_dark" data-parallax-image="<?php echo $parallax_bg_url; ?>">
+
+		<!-- Title Section Portfolio -->	
+		 
+		<?php if($portfolio_header): ?>
 		<div class="section_header">
-			<h2>Портфолио</h2>
+			<h2><?php echo get_the_title($portfolio_header->ID); ?></h2>
+			<?php if($header_subtitle): ?>
 			<div class="s_descr_wrap">
-				<div class="s_descr">Мои работы</div>
+				<div class="s_descr"><?php echo esc_html($header_subtitle); ?></div>
 			</div>
+			<?php endif; ?>
 		</div>
+		<?php endif; ?>
 
 		<!-- Types of Jobs -->
 
@@ -438,57 +464,7 @@
 
 						<!-- Short Job Descriptions -->
 
-
-
-					
-
-							
-						
-
-
-
-
 						<div id="portfolio_grid">
-
-							<?php
-								$portfolio = get_landing_items('portfolio');
-								if($portfolio->have_posts()): while($portfolio->have_posts()): $portfolio->the_post();
-								// переменные
-									$img = get_the_post_thumbnail_url(get_the_ID(), 'full');
-									$subtitle = get_post_meta(get_the_ID(), 'subtitle', true);
-									$filter_class = get_post_meta(get_the_ID(), 'filter_class', true); // category-1, category-2
-									$link_site = get_post_meta(get_the_ID(), 'link_site', true);
-									$link_git = get_post_meta(get_the_ID(), 'link_git', true);
-							?>
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port <?php echo $filter_class; ?>">
-								<img src="<?php echo $img; ?>" alt="<?php the_title(); ?>">
-								<div class ="port_item_cont">
-									<h3><?php the_title(); ?></h3>
-									<p><?php echo $subtitle; ?></p>
-									<button class="popup_content">Open</button>
-								</div>
-
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button">×</button>
-											<h3><?php the_title(); ?></h3>
-
-											<?php if($link_site): ?><a href="<?php echo $link_site; ?>" target="_blank">Перейти на сайт</a><?php endif; ?>
-											<?php if($link_git): ?><a href="<?php echo $link_git; ?>" target="_blank">Перейти в репозиторий</a><?php endif; ?>
-
-											<div class="content_text"><?php the_content();  ?></div>
-											<img src="<?php echo $img; ?>" alt="<?php the_title(); ?>">
-										</div>
-									</div>
-								</div>
-							</div>
-							<?php endwhile; wp_reset_postdata(); endif; ?>
-
-
-
-
 
 							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
 								<img src="img/portfolio/yummy_food.jpg" alt="Alt">
