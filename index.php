@@ -424,11 +424,23 @@
 	$parallax_bg_url = '';
 	$header_subtitle = '';
 
+	// variables for filters and buttons in portfolio section
 	$filter_all = $filter_cat1 = $filter_cat2 = $filter_cat_3 = '';
+	$btn_view = $btn_site = $btn_git = '';
 
 	if($portfolio_header) {
 		$parallax_bg_url = get_the_post_thumbnail_url($portfolio_header->ID, 'fill');
 		$header_subtitle = get_post_meta($portfolio_header->ID, 'subtitle', true);
+
+		// get custom fields for filters and buttons in portfolio section
+		$filter_all = get_post_meta($portfolio_header->ID, 'filter_all', true);
+		$filter_cat1 = get_post_meta($portfolio_header->ID, 'filter_cat1', true);
+		$filter_cat2 = get_post_meta($portfolio_header->ID, 'filter_cat2', true);
+		$filter_cat3 = get_post_meta($portfolio_header->ID, 'filter_cat3', true);
+
+		$btn_view = get_post_meta($portfolio_header->ID, 'btn_view', true);
+		$btn_site = get_post_meta($portfolio_header->ID, 'btn_site', true);
+		$btn_git = get_post_meta($portfolio_header->ID, 'btn_git', true);
 	}
 ?>
 				
@@ -456,15 +468,37 @@
 				<div class="row">
 					<div class="filter_div controls">
 						<ul>
-							<li class="filter active" data-filter="all">Все работы</li>
-							<li class="filter" data-filter=".category-1">Сайты</li>
-							<li class="filter" data-filter=".category-2">Верстка</li>
-							<li class="filter" data-filter=".category-3">Web-дизайн</li>
+							<?php if($filter_all): ?>
+								<li class="filter active" data-filter="all"><?php echo esc_html($filter_all); ?></li>
+							<?php endif; ?>
+
+							<?php if($filter_cat1): ?>
+								<li class="filter" data-filter=".category-1"><?php echo esc_html($filter_cat1;) ?></li>
+							<?php endif; ?>
+
+							<?php if($filter_cat2): ?>
+								<li class="filter" data-filter=".category-2"><?php echo esc_html($filter_cat2); ?></li>
+							<?php endif; ?>
+
+							<?php if($filter_cat3): ?>
+								<li class="filter" data-filter=".category-3"><?php echo esc_html($filter_cat3); ?></li>
+							<?php endif; ?>
 						</ul>
 
 						<!-- Short Job Descriptions -->
 
 						<div id="portfolio_grid">
+
+							<?php 
+								$portfolio_query = new WP_Query(array(
+									'post_type'      => $post_type,
+									'category_name'  => 'portfolio',
+									'posts_per_page' => -1,
+									'orderby'        => 'menu_order',
+									'order'          => 'ASC',
+									'post__not_in'   => $portfolio_header ?array($portfolio_header->ID) : array()
+								));
+							?>
 
 							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
 								<img src="img/portfolio/yummy_food.jpg" alt="Alt">
