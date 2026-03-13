@@ -142,7 +142,7 @@
 					$git_link_labels = get_post_meta($r_id, 'git_link_labels', true);
 
 					// Social Fields
-					$tg =  get_post_meta($r_id, 'social_tg', true);
+					$tg  = get_post_meta($r_id, 'social_tg', true);
 					$git = get_post_meta($r_id, 'social_git', true);
 					$in  = get_post_meta($r_id, "social_in", true);
 				?>
@@ -426,435 +426,141 @@
 
 	// variables for filters and buttons in portfolio section
 	$filter_all = $filter_cat1 = $filter_cat2 = $filter_cat_3 = '';
-	$btn_view = $btn_site = $btn_git = '';
+	$btn_view = $btn_site = $btn_custom = $btn_git = '';
 
 	if($portfolio_header) {
 		$parallax_bg_url = get_the_post_thumbnail_url($portfolio_header->ID, 'fill');
 		$header_subtitle = get_post_meta($portfolio_header->ID, 'subtitle', true);
 
 		// get custom fields for filters and buttons in portfolio section
-		$filter_all = get_post_meta($portfolio_header->ID, 'filter_all', true);
+		$filter_all  = get_post_meta($portfolio_header->ID, 'filter_all', true);
 		$filter_cat1 = get_post_meta($portfolio_header->ID, 'filter_cat1', true);
 		$filter_cat2 = get_post_meta($portfolio_header->ID, 'filter_cat2', true);
 		$filter_cat3 = get_post_meta($portfolio_header->ID, 'filter_cat3', true);
 
-		$btn_view = get_post_meta($portfolio_header->ID, 'btn_view', true);
-		$btn_site = get_post_meta($portfolio_header->ID, 'btn_site', true);
-		$btn_git = get_post_meta($portfolio_header->ID, 'btn_git', true);
+		$btn_view   = get_post_meta($portfolio_header->ID, 'btn_view', true);
+		$btn_site   = get_post_meta($portfolio_header->ID, 'btn_site', true);
+		$btn_custom = get_post_meta($portfolio_header->ID, 'btn_custom', true);
+		$btn_git    = get_post_meta($portfolio_header->ID, 'btn_git', true);
 	}
 ?>
 				
-	<!-- Section Portfolio -->
+<!-- Section Portfolio -->
 
-	<section id="portfolio" class="s_portfolio bg_dark" data-parallax-image="<?php echo $parallax_bg_url; ?>">
+<section id="portfolio" class="s_portfolio bg_dark" data-parallax-image="<?php echo $parallax_bg_url; ?>">
 
-		<!-- Title Section Portfolio -->	
-		 
-		<?php if($portfolio_header): ?>
-		<div class="section_header">
-			<h2><?php echo get_the_title($portfolio_header->ID); ?></h2>
-			<?php if($header_subtitle): ?>
-			<div class="s_descr_wrap">
-				<div class="s_descr"><?php echo esc_html($header_subtitle); ?></div>
-			</div>
-			<?php endif; ?>
+	<!-- Title Section Portfolio -->	
+		
+	<?php if($portfolio_header): ?>
+	<div class="section_header">
+		<h2><?php echo get_the_title($portfolio_header->ID); ?></h2>
+		<?php if($header_subtitle): ?>
+		<div class="s_descr_wrap">
+			<div class="s_descr"><?php echo esc_html($header_subtitle); ?></div>
 		</div>
 		<?php endif; ?>
+	</div>
+	<?php endif; ?>
 
-		<!-- Types of Jobs -->
+	<!-- Types of Jobs -->
 
-		<div class="section_content">
-			<div class="container">
-				<div class="row">
-					<div class="filter_div controls">
-						<ul>
-							<?php if($filter_all): ?>
-								<li class="filter active" data-filter="all"><?php echo esc_html($filter_all); ?></li>
-							<?php endif; ?>
+	<div class="section_content">
+		<div class="container">
+			<div class="row">
+				<div class="filter_div controls">
+					<ul>
+						<?php if($filter_all): ?>
+							<li class="filter active" data-filter="all"><?php echo esc_html($filter_all); ?></li>
+						<?php endif; ?>
 
-							<?php if($filter_cat1): ?>
-								<li class="filter" data-filter=".category-1"><?php echo esc_html($filter_cat1;) ?></li>
-							<?php endif; ?>
+						<?php if($filter_cat1): ?>
+							<li class="filter" data-filter=".category-1"><?php echo esc_html($filter_cat1); ?></li>
+						<?php endif; ?>
 
-							<?php if($filter_cat2): ?>
-								<li class="filter" data-filter=".category-2"><?php echo esc_html($filter_cat2); ?></li>
-							<?php endif; ?>
+						<?php if($filter_cat2): ?>
+							<li class="filter" data-filter=".category-2"><?php echo esc_html($filter_cat2); ?></li>
+						<?php endif; ?>
 
-							<?php if($filter_cat3): ?>
-								<li class="filter" data-filter=".category-3"><?php echo esc_html($filter_cat3); ?></li>
-							<?php endif; ?>
-						</ul>
+						<?php if($filter_cat3): ?>
+							<li class="filter" data-filter=".category-3"><?php echo esc_html($filter_cat3); ?></li>
+						<?php endif; ?>
+					</ul>
 
-						<!-- Short Job Descriptions -->
+					<!-- Short Job Descriptions -->
 
-						<div id="portfolio_grid">
+					<div id="portfolio_grid">
 
-							<?php 
-								$portfolio_query = new WP_Query(array(
-									'post_type'      => $post_type,
-									'category_name'  => 'portfolio',
-									'posts_per_page' => -1,
-									'orderby'        => 'menu_order',
-									'order'          => 'ASC',
-									'post__not_in'   => $portfolio_header ?array($portfolio_header->ID) : array()
-								));
-							?>
+						<?php 
+							$portfolio_query = new WP_Query(array(
+								'post_type'      => $post_type,
+								'category_name'  => 'portfolio',
+								'posts_per_page' => -1,
+								'orderby'        => 'menu_order',
+								'order'          => 'ASC',
+								'post__not_in'   => $portfolio_header ? array($portfolio_header->ID) : array()
+							));
 
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
-								<img src="img/portfolio/yummy_food.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>Yummy Food</h3>
-									<p>Интернет магазин</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>Yummy Food</h3>
-											<a href="https://trikita73.github.io/Show_Yummy_Food/">Перейти на сайт</a>
-											<a href="https://github.com/Trikita73/J.S.__Jummy-Food/">Перейти в репозиторий</a>
-											<p>Интернет магазин создан для реализации и доставики Корейской кухни. Разработан на базе Java Script.</p>
-											<img src="img/portfolio/yummy_food.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>
+							if ($portfolio_query->have_posts()) :
+								while ($portfolio_query->have_posts()) : $portfolio_query->the_post();
+
+								$filter_class  = get_post_meta(get_the_ID(), 'filter_class', true);
+								$item_subtitle = get_post_meta(get_the_ID(), 'item_subtitle', true);
+								$link_git      = get_post_meta(get_the_ID(), 'link_git', true);
+								$link_site     = get_post_meta(get_the_ID(), 'link_site', true);
+								$link_custom   = get_post_meta(get_the_ID(), 'link_custom', true);
+								$item_img_url  = get_the_post_thumbnail_url(get_the_ID(), 'full');
+
+						?>
+
+						<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port <?php echo esc_attr($filter_class); ?>">
+							<img src="<?php echo  esc_url($item_img_url); ?>" alt="<?php the_title(); ?>">
+
+							<div class="port_item_cont">
+								<h3><?php the_title(); ?></h3>
+								<p><?php echo esc_html($item_subtitle); ?></p>
+								<button class="popup_content"><?php echo esc_html($btn_view); ?></button>
 							</div>
 
-							<!-- Popup Window -->
+							<!-- Popup Hidden Window -->
+							 
+							<div class="hidden">
+								<div class="podrt_descr">
+									<div class="modal-box-content">
+										<button class="mfp-close" type="button" title="Close (Esc)">×</button>
+										<h3><?php the_title(); ?></h3>
 
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-2">
-								<img src="img/portfolio/fairy_forest.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>Fairy Forest</h3>
-									<p>Parallax Page</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>Fairy Forest</h3>
-											<a href="https://trikita73.github.io/Parallax_scrolling/">Перейти к верстке</a>
-											<a href="https://github.com/Trikita73/Parallax_scrolling/">Перейти в репозиторий</a>
-											<p>Верстка "Landing_page" в котром используеться эффект Parallax при скроле.</p>
-											<img src="img/portfolio/fairy_forest.jpg" alt="Alt">
+								<?php if($link_site && $btn_site): ?>
+									<a href="<?php echo esc_url($link_site); ?>" target="_blank"><?php echo esc_html($btn_site); ?></a>
+								<?php endif; ?>
+
+								<?php if($link_custom && $btn_custom): ?>
+									<a href="<?php echo esc_url($link_custom); ?>" target="_blank"><?php echo esc_html($btn_custom); ?></a>
+								<?php endif; ?>
+								
+								<?php if($link_git && $btn_git): ?>
+									<a href="<?php echo esc_url($link_git); ?>" target="_blank"><?php echo esc_html($btn_git); ?></a>
+								<?php endif; ?>
+
+										<div class="portfolio_description">
+											<?php the_content(); ?>
 										</div>
-									</div>
-								</div>
-							</div>
 
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
-								<img src="img/portfolio/empire.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>EMPIRE</h3>
-									<p>Flash сайт</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>EMPIRE</h3>
-											<a href="https://trikita73.github.io/Empire/">Перейти на сайт</a>
-											<a href="https://github.com/Trikita73/Empire/">Перейти в репозиторий</a>
-											<p>Сайт Empire – подходит для размещения своих дизайнерских работ. Хорошо адаптирован под мобильные устройства и при этом имеет приятный дизайн.</p>
-											<img src="img/portfolio/empire.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-2">
-								<img src="img/portfolio/creative_scroll.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>Creative Scroll</h3>
-									<p>Scroll page</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>Creative Scroll</h3>
-											<a href="https://trikita73.github.io/scroll-website/">Перейти к верстке</a>
-											<a href="https://github.com/Trikita73/scroll-website/">Перейти в репозиторий</a>
-											<p>Верстка по типу "Landing_Page" c использованием анимации при скроле.</p>
-											<img src="img/portfolio/creative_scroll.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
-								<img src="img/portfolio/AFG.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>A.F.G.</h3>
-									<p>Landing page</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>A.F.G.</h3>
-											<a href="https://trikita73.github.io/Afg/">Перейти на сайт</a>
-											<a href="https://github.com/Trikita73/Afg/">Перейти в репозиторий</a>
-											<p>AFG –  landing page  сайт наглядно показывает всю важность компании. Также есть анимация и адаптация под мобильные устройства.</p>
-											<img src="img/portfolio/AFG.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
-								<img src="img/portfolio/yourdiss.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>YURDISS</h3>
-									<p>Сайт услуг</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>YURDISS</h3>
-											<a href="https://trikita73.github.io/Yurdiss">Перейти на сайт</a>
-											<a href="https://github.com/Trikita73/Yurdiss/">Перейти в репозиторий</a>
-											<p>Сайт созданный для оценочной компании Юрдис, предоставляющей услуги оценки недвижимости, земли, бизнеса и переоценки частных и государственых активов.</p>
-											<img src="img/portfolio/yourdiss.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
-								<img src="img/portfolio/smitler.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>SMITLER</h3>
-									<p>Landing page</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>SMITLER</h3>
-											<a href="https://trikita73.github.io/S-Mitler/">Перейти на сайт</a>
-											<a href="https://github.com/Trikita73/S-Mitler/">Перейти в репозиторий</a>
-											<p>Хороший пример для салона красоты бизнес-класса.</p>
-											<img src="img/portfolio/smitler.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-2">
-								<img src="img/portfolio/horizontal_parallax.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>Horizontal_Parallax</h3>
-									<p>Parallax Page</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>Horizontal_Parallax</h3>
-											<a href="https://trikita73.github.io/Parallax_horizontal/">Перейти к верстке</a>
-											<a href="https://github.com/Trikita73/Parallax_horizontal">Перейти в репозиторий</a>
-											<p>Верстка "Landing_page" в котром используеться эффект горизонтального Parallax при скроле в бок.</p>
-											<img src="img/portfolio/horizontal_parallax.jpg" alt="Alt">
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-1">
-								<img src="img/portfolio/avto-holl.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>АВТО-ХОЛЛ</h3>
-									<p>Сайт визитка</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>АВТО-ХОЛЛ</h3>
-											<a href="https://trikita73.github.io/AvtoHoll/">Перейти на сайт</a>
-											<a href="https://github.com/Trikita73/AvtoHoll/">Перейти в репозиторий</a>
-											<p>Сайт визитка, созданный для автомастерской занимающейся обслуживанием автомобилей разного класса.</p>
-											<img src="img/portfolio/avto-holl.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>								
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-3">
-								<img src="img/portfolio/Web-job_2.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>T_PIZZA</h3>
-									<p>Template</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>T_PIZZA</h3>
-											<a class="temp" href="https://github.com/Trikita73/Template_Pizza-at-Home/">Перейти в репозиторий</a>
-											<p>Дизайн-Макет Pizza-at-Home.</p>
-											<img src="img/portfolio/Web-job_2.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>								
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-2">
-								<img src="img/portfolio/grow.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>Grow</h3>
-									<p>Landing page</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>Grow</h3> 
-											<a href="https://trikita73.github.io/Parallax_Landing_Site/">Перейти к верстке</a>
-											<a href="https://github.com/Trikita73/Parallax_Landing_Site/">Перейти в репозиторий</a>
-											<p>Верстка по типу "Landing_Page" c использованием Parallax при скроле в низ.</p>
-											<img src="img/portfolio/grow.jpg" alt="Alt">
-										</div>
-									</div>
-								</div>								
-							</div>
-
-							<!-- Popup Window -->
-
-							<div class="mix col-md-3 col-sm-6 col-xs-6 portfolio_item opacity_port category-3">
-								<img src="img/portfolio/Web-job_1.jpg" alt="Alt">
-								<div class="port_item_cont">
-									<h3>T_LIGHTNING</h3>
-									<p>Template</p>
-									<button class="popup_content">Посмотреть</button>
-								</div>
-								<!-- Popup Hidden Window -->
-								<div class="hidden">
-									<div class="podrt_descr">
-										<div class="modal-box-content">
-											<button class="mfp-close" type="button" title="Close (Esc)">×</button>
-											<h3>T_LIGHTNING</h3>
-											<a class="temp" href="https://github.com/Trikita73/Template_Lightning/">Перейти к репозиторию</a>
-											<p>Дизайн-Макет Lighting.</p>
-											<img src="img/portfolio/Web-job_1.jpg" alt="Alt">
-										</div>
+										<img src="<?php echo esc_url($item_img_url); ?>" alt="<?php the_title(); ?>">
 									</div>
 								</div>
 							</div>
 						</div>
+						<?php
+							endwhile;
+							wp_reset_postdata();
+						endif;
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
-    <!-- Section Contacts -->
-
-	<section id="contacts" class="s_contacts bg_light">
-		<div class="section_header">
-			<h2>Контакты</h2>
-			<div class="s_descr_wrap">
-				<div class="s_descr">Личная информация</div>
-			</div>
-		</div>
-
-		<!-- Submission Form -->
-
-		<div class="section_content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-sm-6">
-						<!--
-						<div class="contact_box">
-							<i class="contacts_icon icon-basic-geolocalize-05"></i>
-							<h3>Адрес:</h3>
-							<p>г. Киев</p>
-						</div>
-						-->
-						<div class="contact_box">
-							<i class="contacts_icon icon-basic-smartphone"></i>
-							<h3>Телефон:</h3>
-							<p>+3 8(093) 86 30 992</p>
-						</div>
-						<div class="contact_box">
-							<i class="contacts_icon icon-basic-mail"></i>
-							<h3>Mail:</h3>
-							<p>diachenkonewwork@gmail.com</p>
-						</div>
-						<div class="contact_box">
-							<i class="contacts_icon icon-basic-webpage-img-txt"></i>
-							<h3>Social pages:</h3>
-							<p><a href="https://t.me/Andrii_aka_Junior" target="_blank">Telegram.org</a></p>
-							<p><a href="https://github.com/Trikita73/" target="_blank">Github.com</a></p>
-							<p class="last_contact"><a href="https://www.linkedin.com/in/andrii-diachenko-204752273/" target="_blank">LinkedIn.com</a></p>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6">
-						<form action="https://formspree.io/f/dyachenkoandrii@gmail.com" class="main_form" novalidate target="_blank" method="POST">
-							<label class="form-group">
-								<span class="color_element">*</span> Ваше имя:
-								<input type="text" name="name" placeholder="Ваше имя" data-validation-required-message="Вы не ввели имя" required />
-								<span class="help-block"></span>
-							</label>
-							<label class="form-group">
-								<span class="color_element">*</span> Ваш E-mail:
-								<input type="email" name="email" placeholder="Ваш E-mail" data-validation-required-message="Не корректно введен E-mail" required />
-								<span class="help-block"></span>
-							</label>
-							<label class="form-group">
-								<span class="color_element">*</span> Ваше сообщение:
-								<textarea name="message" placeholder="Ваше сообщение" data-validation-required-message="Вы не ввели сообщение" required></textarea>
-								<span class="help-block"></span>
-							</label>
-							<button>Отправить</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
     <?php get_footer(); ?>

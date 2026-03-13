@@ -132,49 +132,6 @@ $(document).ready(function() {
 
 });
 
-// JQuery: size (margin, padding, font-size) for text which locate in div #resume -->
-/*
-function adjustMaskText() {
-  $(".portfolio_item").each(function () {
-    const $item = $(this);
-    const $mask = $item.find(".mask");
-    const $h2 = $mask.find("h2");
-    const $p = $mask.find("p");
-    const $ul = $mask.find("ul");
-
-    const width = $item.outerWidth();
-    const height = $item.outerHeight();
-
-    const vw = $(window).width() / 100;
-    const vh = $(window).height() / 100;
-    const index = vw + vh;
-
-    // Вычислим размеры на основе index
-    const fontSize = Math.max(12, index * 0.8);          // минимум 12px
-    const headingSize = fontSize + 4;
-    const paddingTop = Math.max(10, index * 2);          // минимум 10px
-
-    // Применим стили
-    $mask.css({
-      "padding-top": paddingTop + "px",
-      "padding-left": 0,
-      "padding-right": 0,
-      "padding-bottom": "10px", // можно настроить
-      "text-align": "center"
-    });
-
-    $h2.css({
-      "font-size": headingSize + "px",
-      "margin-bottom": "8px"
-    });
-
-    $p.css("font-size", fontSize + "px");
-    $ul.css("font-size", (fontSize - 1) + "px");
-  });
-}
-*/
-
-
 //JQuery: He is responsible for the slow scroll and loader -->
 $(window).load(function() {
 	$(".loader_inner").fadeOut();
