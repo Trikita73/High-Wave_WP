@@ -43,9 +43,11 @@
 
 
 	<!-- Header + Effect Parallax -->
-
+	<?php if($header_bg_url): ?>
 	<header class="main_head main_color_bg" data-parallax="scroll" data-image-src="<?php echo esc_url($header_bg_url); ?>" data-z-index="1">
-
+	<?php else: ?>
+	<header class="main_head main_color_bg">
+	<?php endif; ?>
 		<!-- Logo Inkscape -->
 
 		<div class="logo_container">

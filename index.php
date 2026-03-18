@@ -215,7 +215,7 @@
 
 <!-- Section Directions --> 
 
-<section id="directions" class="s_directions bg_direction" data-parallax="scroll" data-parallax-image="<?php echo $parallax_img_url; ?>"> 
+<section id="directions" class="s_directions bg_direction" data-parallax="scroll" data-parallax-src="<?php echo $parallax_img_url; ?>"> 
 	
 	<!-- Title Section Directions -->
 
