@@ -43,7 +43,7 @@
 					<div class="social_wrap footer_social">
 						<ul>
 							<li title="telegram"><a href="<?php echo esc_url($tg_link); ?>" target="_blank"><i class="fa fa-telegram"></i></a></li>
-							<li title="github"><a href="<? echo esc_url($git_link); ?>" target="_blank"><i class="fa fa-github"></i></a></li>
+							<li title="github"><a href="<?php echo esc_url($git_link); ?>" target="_blank"><i class="fa fa-github"></i></a></li>
 							<li title="linkedin"><a href="<?php echo esc_url($in_link); ?>" target="_blank"><i class="fa fa-linkedin"></i></a></li>
 						</ul>
 					</div>

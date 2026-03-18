@@ -24,14 +24,14 @@
 		$post_type = 'landing_sections';
 		$header_section = get_page_by_path('header-section', OBJECT, $post_type);
 
-		$header_bg = '';
+		$header_bg_url = '';
 		$svg_logo  = '';
 		$hero_name = '';
 		$hero_title = '';
 
 		if($header_section) {
 			// Get URL of featured image for header background
-			$header_bg = get_the_post_thumbnail_url($header_section->ID, 'full');
+			$header_bg_url = get_the_post_thumbnail_url($header_section->ID, 'full');
 
 			// Header Custom Fields
 			$svg_logo  = get_post_meta($header_section->ID, 'svg_logo', true);
@@ -44,7 +44,7 @@
 
 	<!-- Header + Effect Parallax -->
 
-	<header class="main_head main_color_bg" data-parallax="scroll" data-image-src="<?php echo esc_url($header_bg); ?>" data-z-index="1">
+	<header class="main_head main_color_bg" data-parallax="scroll" data-image-src="<?php echo esc_url($header_bg_url); ?>" data-z-index="1">
 
 		<!-- Logo Inkscape -->
 
