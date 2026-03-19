@@ -115,7 +115,7 @@
 						<?php endif; ?>
 					</ul>
 					
-					<p>
+					<p class="eng_about">
 						<?php if($expert_skills): ?>
 							<span class="eng_dark"><?php echo $english_labels; ?></span> <?php echo $english_skills ?>.
 						<?php endif; ?>
@@ -653,7 +653,7 @@
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-6">
-						<form action="<?php echo esc_url($form_action); ?>" class="main_form" novalidate target="_blank" method="POST">
+						<form action="<?php echo esc_url($form_action); ?>" class="main_form" novalidate  method="POST">
 							<label class="form-group">
 								<span class="color_element">*</span> <?php echo esc_html($label_name); ?>:
 								<input type="text" name="name" placeholder="<?php echo esc_attr($placeholder_name); ?>" data-validation-required-message="<?php echo esc_attr($error_name); ?>" required />

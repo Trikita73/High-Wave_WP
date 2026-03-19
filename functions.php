@@ -18,18 +18,18 @@ function my_landing_scripts() {
     // add a main style file:
     wp_enqueue_style('main-style', get_stylesheet_uri() );
 
-    // add CSS files:
-    wp_enqueue_style('main-css', get_template_directory_uri() . '/css/main.min.css');
-    wp_enqueue_style('fonts-css', get_template_directory_uri() . '/css/fonts.min.css');
-    wp_enqueue_style('media-css', get_template_directory_uri() . '/css/media.min.css');
-    wp_enqueue_style('skins-css', get_template_directory_uri() . '/css/skins/blue.css');
-
     // add CSS files with folder libs:
     wp_enqueue_style('libs-animate-css', get_template_directory_uri() . '/libs/animate/animate.css');
     wp_enqueue_style('libs-magnific-popup-css', get_template_directory_uri() . '/libs/magnific-popup/magnific-popup.css');
     wp_enqueue_style('libs-linea-css', get_template_directory_uri() . '/libs/linea/styles.css');
     wp_enqueue_style('libs-font-awesome', get_template_directory_uri() . '/libs/font-awesome/css/font-awesome.min.css');
     wp_enqueue_style('libs-bootstrap', get_template_directory_uri() . '/libs/bootstrap/bootstrap-grid.min.css');
+
+    // add CSS files:
+    wp_enqueue_style('main-css', get_template_directory_uri() . '/css/main.min.css');
+    wp_enqueue_style('fonts-css', get_template_directory_uri() . '/css/fonts.min.css');
+    wp_enqueue_style('media-css', get_template_directory_uri() . '/css/media.min.css');
+    wp_enqueue_style('skins-css', get_template_directory_uri() . '/css/skins/blue.css');
 
     // add JS files:
     wp_enqueue_script('parallax-js', get_template_directory_uri() . '/libs/parallax/parallax.min.js', array('jquery'), '2.1.3', true);
@@ -89,3 +89,5 @@ function theme_register_nav_menu() {
         'header_menu' => 'Header Menu',
     ));
 }
+
+

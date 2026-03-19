@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html { /* Для плавной прокрутки всей страницы */
     scroll-behavior: smooth;
   }
@@ -9,6 +15,9 @@ html { /* Для плавной прокрутки всей страницы */
   }
 
 html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
     overflow-x: hidden;
 }
 
@@ -402,6 +411,11 @@ body {
         margin-bottom: 1px;
         line-height: 1.45;
     }
+
+    .s_about .eng_about {
+     font-size: 15px;
+    margin-top: 15px;
+    }
     
     .s_about ul,.s_about li {
     margin:0;
@@ -542,7 +556,7 @@ body {
     
     .portfolio_item {
     display:none;
-    padding:0
+    padding: 0
     }
     
     .portfolio_item img {
@@ -567,6 +581,10 @@ body {
     opacity:0;
     -webkit-transition:all .5s;
     transition:all .5s
+    }
+
+    .portfolio_item .port_item_cont p {
+        margin: 15px 0;
     }
     
     .portfolio_item:hover .port_item_cont {
@@ -667,6 +685,7 @@ body {
     .contact_box p {
     margin-top:5px;
     margin-bottom: 0;
+    font-size: 17px;
     }
 
     .contact_box p:first-of-type {

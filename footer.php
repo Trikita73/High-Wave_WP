@@ -27,7 +27,7 @@
 
 					<?php if($footer_section): ?>
 					<div class="copyright">
-						<?php echo esc_html($copyright_year); ?>
+						&copy; <?php echo esc_html($copyright_year); ?>
 						<script type="text/javascript">
 							document.write(new Date().getFullYear());
 						</script>  

@@ -133,7 +133,7 @@ jQuery(document).ready(function($) {
 
     //JQuery: Scroll Top -->
     $('#s_top').hide();
-
+    // Показываем кнопку "Scroll Top" при прокрутке вниз на 100 пикселей и скрываем при возвращении вверх
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
             $('#s_top').fadeIn();
@@ -141,14 +141,14 @@ jQuery(document).ready(function($) {
             $('#s_top').fadeOut();
         }
     });
-
+    // При клике на кнопку "Scroll Top" сначала уничтожаем параллакс, затем плавно скроллим к началу страницы, и после завершения анимации снова инициализируем параллакс для всех элементов с атрибутом data-parallax="scroll"
     $("#s_top").click(function () {
         if ($(window).width() > 992) {
             try {
                 $("[data-parallax='scroll']").parallax("destroy");
             } catch (e) { }
         }
-
+        // Плавный скролл к началу страницы
         $("html, body").stop().animate({ scrollTop: 0 }, 400, function () {
 			if ($(window).width() > 922) {
 				$("[data-parallax='scroll']").each(function() {
@@ -156,7 +156,10 @@ jQuery(document).ready(function($) {
 					if (bgImage && bgImage !== "") {
 						$(this).parallax({
 							imageSrc: bgImage,
-							zIndex: 1
+							zIndex: 1,
+							iosFix: true,
+							androidFix: true,
+							bleed: 10
 						});
 					}
 				});
@@ -180,6 +183,7 @@ jQuery(document).ready(function($) {
         }
     }
 
+    //JQuery: This code is responsible for the slow scroll and loader -->
     $(".toggle_mnu").on("click", function () {
         setTimeout(centerTopMenu, 50); 
     });
