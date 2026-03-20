@@ -195,4 +195,23 @@ jQuery(document).ready(function($) {
         "speed" : "30"
     });
 
+    $(".main_form").submit(function() {
+        var th = $(this);
+        $.ajax({
+            type: "POST",
+            url: "/wp-content/themes/high-wave/send.php",
+            data: th.serialize()
+        }).done(function(data) {
+            if (data == "success") {
+                alert("Спасибо за заявку! Скоро мы с вами свяжемся.");
+                setTimeout(function() {
+                    th.trigger("reset");
+                }, 1000);
+            } else {
+                alert("Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.");
+            }
+        });
+        return false;
+    });
+
 });

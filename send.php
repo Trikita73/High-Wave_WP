@@ -1,7 +1,12 @@
 <?php 
+
+require_once 'env.php';
+
+loadEnv(__DIR__ . '/.env');
+
 // Telegram Bot API Token and Chat ID
-$token = "YOUR_TELEGRAM";
-$chat_id = "YOUR_CHAT_ID";
+$token =  $_ENV['TELEGRAM_TOKEN'];
+$chat_id = $_ENV['TELEGRAM_CHAT_ID'];
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = strip_tags(trim($_POST["name"]));
@@ -10,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepare the message to send
     $arr = array(
-        'New message from Site:' => '',
+        'New message from Site "High Wave"' => '',
         'Name:' => $name,
         'Email:' => $email,
         'Message:' => $message
