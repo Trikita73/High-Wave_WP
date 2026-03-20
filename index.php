@@ -214,9 +214,12 @@
 ?>
 
 <!-- Section Directions --> 
-
+<?php if($parallax_img_url): ?>
 <section id="directions" class="s_directions bg_direction" data-parallax="scroll" data-parallax-src="<?php echo $parallax_img_url; ?>"> 
-	
+<?php else: ?>	
+<section id="directions" class="s_directions bg_direction">
+<?php endif; ?>
+
 	<!-- Title Section Directions -->
 
 	<div class="section_header">
@@ -446,8 +449,11 @@
 ?>
 				
 <!-- Section Portfolio -->
-
+<?php if($parallax_bg_url): ?>
 <section id="portfolio" class="s_portfolio bg_dark" data-parallax-image="<?php echo $parallax_bg_url; ?>">
+<?php else: ?>
+<section id="portfolio" class="s_portfolio bg_dark">
+<?php endif; ?>
 
 	<!-- Title Section Portfolio -->	
 		

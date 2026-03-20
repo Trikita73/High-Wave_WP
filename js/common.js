@@ -202,13 +202,14 @@ jQuery(document).ready(function($) {
             url: "/wp-content/themes/high-wave/send.php",
             data: th.serialize()
         }).done(function(data) {
-            if (data == "success") {
+            console.log("Ответ от сервера:", data);
+            if (data.trim == "success") { 
                 alert("Спасибо за заявку! Скоро мы с вами свяжемся.");
                 setTimeout(function() {
                     th.trigger("reset");
                 }, 1000);
             } else {
-                alert("Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.");
+                alert("Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз." + data);
             }
         });
         return false;
