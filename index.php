@@ -568,120 +568,138 @@
 	</div>
 </section>
 
-	<!-- Data for Section Resume -->
-	<?php
-		$post_type = 'landing_sections';
-		$contacts_header     = get_page_by_path('contacts-header', OBJECT, $post_type);
-		$contacts_left_size  = get_page_by_path('contacts-left-size', OBJECT, $post_type);
-		$contacts_right_size = get_page_by_path('contacts-right-size', OBJECT, $post_type);
-	
-		if($contacts_header):
-			$subtitle = get_post_meta($contacts_header->ID, 'subtitle', true);
+<!-- Data for Section Resume -->
+<?php
+	$post_type = 'landing_sections';
+	$contacts_header     = get_page_by_path('contacts-header', OBJECT, $post_type);
+	$contacts_left_size  = get_page_by_path('contacts-left-size', OBJECT, $post_type);
+	$contacts_right_size = get_page_by_path('contacts-right-size', OBJECT, $post_type);
 
-			// Contacts Custom Fields
-			$phone_title = get_post_meta($contacts_left_size->ID, 'phone_title', true);
-			$phone_val   = get_post_meta($contacts_left_size->ID, 'phone_val', true);
-			$email_title = get_post_meta($contacts_left_size->ID, 'email_title', true);
-			$email_val   = get_post_meta($contacts_left_size->ID, 'email_val', true);
+	if($contacts_header):
+		$subtitle = get_post_meta($contacts_header->ID, 'subtitle', true);
 
-			// Social Links
-			$social_title = get_post_meta($contacts_left_size->ID, 'social_title', true);
-			$tg_text 	  = get_post_meta($contacts_left_size->ID, 'tg_text', true);
-			$tg_url       = get_post_meta($contacts_left_size->ID, 'tg_url', true);
-			$gh_text      = get_post_meta($contacts_left_size->ID, 'gh_text', true);
-			$gh_url       = get_post_meta($contacts_left_size->ID, 'gh_url', true);
-			$li_text      = get_post_meta($contacts_left_size->ID, 'li_text', true);
-			$li_url       = get_post_meta($contacts_left_size->ID, 'li_url', true);
+		// Contacts Custom Fields
+		$phone_title = get_post_meta($contacts_left_size->ID, 'phone_title', true);
+		$phone_val   = get_post_meta($contacts_left_size->ID, 'phone_val', true);
+		$email_title = get_post_meta($contacts_left_size->ID, 'email_title', true);
+		$email_val   = get_post_meta($contacts_left_size->ID, 'email_val', true);
 
-			// Form Custom Fields
-			$form_action      = get_post_meta($contacts_right_size->ID, 'form_action', true);
-			$label_name   	  = get_post_meta($contacts_right_size->ID, 'label_name', true);
-			$placeholder_name = get_post_meta($contacts_right_size->ID, 'placeholder_name', true);
-			$error_name       = get_post_meta($contacts_right_size->ID, 'error_name', true);
+		// Social Links
+		$social_title = get_post_meta($contacts_left_size->ID, 'social_title', true);
+		$tg_text 	  = get_post_meta($contacts_left_size->ID, 'tg_text', true);
+		$tg_url       = get_post_meta($contacts_left_size->ID, 'tg_url', true);
+		$gh_text      = get_post_meta($contacts_left_size->ID, 'gh_text', true);
+		$gh_url       = get_post_meta($contacts_left_size->ID, 'gh_url', true);
+		$li_text      = get_post_meta($contacts_left_size->ID, 'li_text', true);
+		$li_url       = get_post_meta($contacts_left_size->ID, 'li_url', true);
 
-			$label_email       = get_post_meta($contacts_right_size->ID, 'label_email', true);
-			$placeholder_email = get_post_meta($contacts_right_size->ID, 'placeholder_email', true);
-			$error_email       = get_post_meta($contacts_right_size->ID, 'error_email', true);
+		// Form Custom Fields
+		$form_action      = get_post_meta($contacts_right_size->ID, 'form_action', true);
+		$label_name   	  = get_post_meta($contacts_right_size->ID, 'label_name', true);
+		$placeholder_name = get_post_meta($contacts_right_size->ID, 'placeholder_name', true);
+		$error_name       = get_post_meta($contacts_right_size->ID, 'error_name', true);
 
-			$label_message       = get_post_meta($contacts_right_size->ID, 'label_message', true);
-			$placeholder_message = get_post_meta($contacts_right_size->ID, 'placeholder_message', true);
-			$error_message       = get_post_meta($contacts_right_size->ID, 'error_message', true);
-			$btn_submit 		 = get_post_meta($contacts_right_size->ID, 'btn_submit', true);
-	?>	
+		$label_email       = get_post_meta($contacts_right_size->ID, 'label_email', true);
+		$placeholder_email = get_post_meta($contacts_right_size->ID, 'placeholder_email', true);
+		$error_email       = get_post_meta($contacts_right_size->ID, 'error_email', true);
 
-    <!-- Section Contacts -->
+		$label_message       = get_post_meta($contacts_right_size->ID, 'label_message', true);
+		$placeholder_message = get_post_meta($contacts_right_size->ID, 'placeholder_message', true);
+		$error_message       = get_post_meta($contacts_right_size->ID, 'error_message', true);
+		$btn_submit 		 = get_post_meta($contacts_right_size->ID, 'btn_submit', true);
+?>	
 
-	<section id="contacts" class="s_contacts bg_light">
-		<div class="section_header">
-			<h2><?php echo get_the_title($contacts_header->ID); ?></h2>
-			<?php if($subtitle): ?>
-			<div class="s_descr_wrap">
-				<div class="s_descr"><?php echo esc_html($subtitle); ?></div>
-			</div>
-			<?php endif; ?>
+<!-- Section Contacts -->
+
+<section id="contacts" class="s_contacts bg_light">
+	<div class="section_header">
+		<h2><?php echo get_the_title($contacts_header->ID); ?></h2>
+		<?php if($subtitle): ?>
+		<div class="s_descr_wrap">
+			<div class="s_descr"><?php echo esc_html($subtitle); ?></div>
 		</div>
+		<?php endif; ?>
+	</div>
 
-		<!-- Submission Form -->
+	<!-- Submission Form -->
 
-		<div class="section_content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-sm-6">
+	<div class="section_content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
 
-						<?php if($phone_val): ?>
-						<div class="contact_box">
-							<i class="contacts_icon icon-basic-smartphone"></i>
-							<h3><?php echo esc_html($phone_title); ?></h3>
-							<p><?php echo esc_html($phone_val); ?></p>
-						</div>
-						<?php endif; ?>
-
-						<?php if($email_val): ?>
-						<div class="contact_box">
-							<i class="contacts_icon icon-basic-mail"></i>
-							<h3><?php echo esc_html($email_title); ?></h3>
-							<p><?php echo esc_html($email_val); ?></p>
-						</div>
-						<?php endif; ?>
-
-						<div class="contact_box">
-							<i class="contacts_icon icon-basic-webpage-img-txt"></i>
-							<h3><?php echo esc_html($social_title); ?></h3>
-							<?php if($tg_url): ?>
-								<p><a href="<?php echo esc_url($tg_url); ?>" target="_blank"><?php echo esc_html($tg_text); ?></a></p>
-							<?php endif; ?>
-							<?php if($gh_url): ?>
-								<p><a href="<?php echo esc_url($gh_url); ?>" target="_blank"><?php echo esc_html($gh_text); ?></a></p>
-							<?php endif; ?>
-							<?php if($li_url): ?>
-								<p class="last_contact"><a href="<?php echo esc_url($li_url); ?>" target="_blank"><?php echo esc_html($li_text); ?></a></p>
-							<?php endif; ?>
-						</div>
+					<?php if($phone_val): ?>
+					<div class="contact_box">
+						<i class="contacts_icon icon-basic-smartphone"></i>
+						<h3><?php echo esc_html($phone_title); ?></h3>
+						<p><?php echo esc_html($phone_val); ?></p>
 					</div>
-					<div class="col-md-6 col-sm-6">
-						<form action="<?php echo esc_url($form_action); ?>" class="main_form" novalidate  method="POST">
-							<label class="form-group">
-								<span class="color_element">*</span> <?php echo esc_html($label_name); ?>:
-								<input type="text" name="name" placeholder="<?php echo esc_attr($placeholder_name); ?>" data-validation-required-message="<?php echo esc_attr($error_name); ?>" required />
-								<span class="help-block"></span>
-							</label>
-							<label class="form-group">
-								<span class="color_element">*</span> <?php echo esc_html($label_email); ?>:
-								<input type="email" name="email" placeholder="<?php echo esc_attr($placeholder_email); ?>" data-validation-required-message="<?php echo esc_attr($error_email); ?>" required />
-								<span class="help-block"></span>
-							</label>
-							<label class="form-group">
-								<span class="color_element">*</span> <?php echo esc_html($label_message); ?>:
-								<textarea name="message" placeholder="<?php echo esc_attr($placeholder_message); ?>" data-validation-required-message="<?php echo esc_attr($error_message); ?>" required></textarea>
-								<span class="help-block"></span>
-							</label>
-							<button><?php echo esc_html($btn_submit); ?></button>
-						</form>
+					<?php endif; ?>
+
+					<?php if($email_val): ?>
+					<div class="contact_box">
+						<i class="contacts_icon icon-basic-mail"></i>
+						<h3><?php echo esc_html($email_title); ?></h3>
+						<p><?php echo esc_html($email_val); ?></p>
 					</div>
+					<?php endif; ?>
+
+					<div class="contact_box">
+						<i class="contacts_icon icon-basic-webpage-img-txt"></i>
+						<h3><?php echo esc_html($social_title); ?></h3>
+						<?php if($tg_url): ?>
+							<p><a href="<?php echo esc_url($tg_url); ?>" target="_blank"><?php echo esc_html($tg_text); ?></a></p>
+						<?php endif; ?>
+						<?php if($gh_url): ?>
+							<p><a href="<?php echo esc_url($gh_url); ?>" target="_blank"><?php echo esc_html($gh_text); ?></a></p>
+						<?php endif; ?>
+						<?php if($li_url): ?>
+							<p class="last_contact"><a href="<?php echo esc_url($li_url); ?>" target="_blank"><?php echo esc_html($li_text); ?></a></p>
+						<?php endif; ?>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<form action="<?php echo esc_url($form_action); ?>" class="main_form" novalidate  method="POST">
+						<label class="form-group">
+							<span class="color_element">*</span> <?php echo esc_html($label_name); ?>:
+							<input type="text" name="name" placeholder="<?php echo esc_attr($placeholder_name); ?>" data-validation-required-message="<?php echo esc_attr($error_name); ?>" required />
+							<span class="help-block"></span>
+						</label>
+						<label class="form-group">
+							<span class="color_element">*</span> <?php echo esc_html($label_email); ?>:
+							<input type="email" name="email" placeholder="<?php echo esc_attr($placeholder_email); ?>" data-validation-required-message="<?php echo esc_attr($error_email); ?>" required />
+							<span class="help-block"></span>
+						</label>
+						<label class="form-group">
+							<span class="color_element">*</span> <?php echo esc_html($label_message); ?>:
+							<textarea name="message" placeholder="<?php echo esc_attr($placeholder_message); ?>" data-validation-required-message="<?php echo esc_attr($error_message); ?>" required></textarea>
+							<span class="help-block"></span>
+						</label>
+						<button><?php echo esc_html($btn_submit); ?></button>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
-	<?php endif; ?>
+	</div>
+</section>
+<?php endif; ?>
 
-    <?php get_footer(); ?>
+<!-- PopUp for Form --> 
+ <div id="success-popup" class="white-popup mfp-hide">
+	<div class="success-content">
+		<i class="fa fa-check-circle"></i>
+		<h3>Спасибо</h3>
+		<p>Ваше сообщение успешно отправлено. <br> Мы свяжемся с вами в ближайшее время.</p>
+		<button class="button mfp-close-btn">Закрыть</button>
+	</div>
+ </div>
+ <div id="error-popup" class="white-popup mfp-hide">
+	<div class="success-content">
+		<i class="fa fa-exclamation-circle" style="color: #e74c3c"></i> <h3>Внимание!</h3>
+		<p>Пожалуйста, заполните все обязательные поля перед отправкой.</p>
+		<button class="button mfp-close-btn">ОК</button>
+	</div>
+ </div>
+
+
+<?php get_footer(); ?>

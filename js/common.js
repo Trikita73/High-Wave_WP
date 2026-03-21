@@ -195,24 +195,61 @@ jQuery(document).ready(function($) {
         "speed" : "30"
     });
 
-    $(".main_form").submit(function() {
+    // Form
+    $(".main_form").submit(function(e) {
         var th = $(this);
+        var btn = th.find("button");
+
+        if (this.checkValidity() === false) {
+            e.preventDefault();
+           // e.stopPropagation();
+
+            $.magnificPopup.open ({
+                items: { src: "#error-popup"},
+                type: 'inline',
+                mainClass: 'mfp-fade',
+                removalDelay: 300
+            });
+
+            return false;
+        }
+
+        // Turn on loader and block button
+        btn.addClass("loading");
+
         $.ajax({
             type: "POST",
             url: "/wp-content/themes/high-wave/send.php",
             data: th.serialize()
         }).done(function(data) {
-            console.log("Ответ от сервера:", data);
-            if (data.trim == "success") { 
-                alert("Спасибо за заявку! Скоро мы с вами свяжемся.");
-                setTimeout(function() {
-                    th.trigger("reset");
-                }, 1000);
+            // Clean loader anyway
+            btn.removeClass("loading");
+
+            if (data.trim().toLowerCase() === "success") {
+                
+                // call popup 
+                $.magnificPopup.open({
+                    items: {
+                        src: '#success-popup'
+                    },
+                    type: 'inline',
+                });
+                th.trigger("reset");
+                th.removeClass('was-validated');
             } else {
-                alert("Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз." + data);
+                $.magnificPopup.open({
+                    items: {src: '#error-popup'},
+                    type: 'inline'
+                });
             }
         });
         return false;
+    });
+
+    // close form
+    $(document).on('click', '.mfp-close-btn', function (e) {
+        e.preventDefault();
+        $.magnificPopup.close();
     });
 
 });

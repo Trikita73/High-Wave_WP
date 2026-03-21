@@ -1,42 +1,43 @@
-<?php 
-
+<?php
 require_once 'env.php';
-
 loadEnv(__DIR__ . '/.env');
 
-// Telegram Bot API Token and Chat ID
-$token =  $_ENV['TELEGRAM_TOKEN'];
+$token = $_ENV['TELEGRAM_TOKEN'];
 $chat_id = $_ENV['TELEGRAM_CHAT_ID'];
+
+// --- БЛОК ЛОГИРОВАНИЯ ---
+$log_file = __DIR__ . '/debug.log';
+$log_data = "--- " . date("Y-m-d H:i:s") . " ---\n";
+$log_data .= "Method: " . $_SERVER['REQUEST_METHOD'] . "\n";
+$log_data .= "POST Data: " . print_r($_POST, true) . "\n";
+$log_data .= "Raw Input: " . file_get_contents('php://input') . "\n";
+file_put_contents($log_file, $log_data, FILE_APPEND);
+// ------------------------
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Собираем данные и очищаем их
-    $name = strip_tags(trim($_POST["name"]));
-    $email = strip_tags(trim($_POST["email"]));
-    $message = strip_tags(trim($_POST["message"]));
+    $name = strip_tags(trim($_POST["name"] ?? 'Пусто'));
+    $email = strip_tags(trim($_POST["email"] ?? 'Пусто'));
+    $message = strip_tags(trim($_POST["message"] ?? 'Пусто'));
 
-    // Формируем текст сообщения
     $text = "<b>Новая заявка с сайта!</b>\n";
     $text .= "<b>Имя:</b> " . $name . "\n";
     $text .= "<b>Email:</b> " . $email . "\n";
     $text .= "<b>Сообщение:</b> " . $message;
 
-    // Параметры для запроса к Telegram
     $data = [
         'chat_id' => $chat_id,
         'text' => $text,
         'parse_mode' => 'html'
     ];
 
-    // Инициализируем cURL (это надежнее, чем fopen)
     $ch = curl_init("https://api.telegram.org/bot{$token}/sendMessage");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data)); // Сами кодируем данные
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Игнорируем проблемы с SSL на локалке
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
     $response = curl_exec($ch);
-    $error = curl_error($ch);
     curl_close($ch);
 
     if ($response) {
@@ -44,12 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($resArray['ok'] === true) {
             echo "success";
         } else {
-            // Если Telegram вернул ошибку (например, неверный ID или Токен)
             echo "Telegram Error: " . $resArray['description'];
         }
     } else {
-        // Если cURL вообще не смог отправить запрос (проблемы с интернетом/сервером)
-        echo "cURL Error: " . $error;
+        echo "cURL Error";
     }
 }
-?>
