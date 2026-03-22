@@ -91,3 +91,66 @@ function theme_register_nav_menu() {
 }
 
 
+/** 
+ * Инициализация настроек темы
+ */
+function theme_settings_init() {
+    register_setting('sample_options', 'sample_theme_options');
+}
+add_action('admin_init', 'theme_setting_init');
+
+/**
+ * Добавление страницы в меню админки
+ */
+function theme_options_add_page() {
+    add_theme_page(
+        'Settings Theme', // Заголовок страницы в браузере
+        'Settings Theme', // Название в меню
+        'edit_theme_options', // Права доступа
+        'theme_options', // Ярлык (slug)
+        'theme_options_do_page', // Функция, которая рисует страницу (твой код)
+    );
+}
+add_action('admin_menu', 'theme_options_add_page');
+
+
+function theme_options_do_page() {
+    $select_options = array(
+        'blue'   => array('value' => 'blue',   'label' => 'Blue'),
+        'pink'   => array('value' => 'pink',   'label' => 'Pink'),
+        'tomato' => array('value' => 'tomato', 'label' => 'Tomato'),
+        'green'  => array('value' => 'green',  'label' => 'Green',),
+        'purple' => array('value' => 'purple', 'label' => 'Purple')
+    );
+
+    $options = get_option('sample_theme_options');
+    ?>
+    <div class="wrap">
+        <h2>Settings Theme High-Wave</h2>
+        <form method="post" action="options.php">
+            <?php settings_fields('sample_options'); ?>
+
+            <table class="form-table">
+                <tr class="top">
+                    <th class="row">Выберите цветовую схему</th>
+                    <td>
+                        <select name="sample_theme_options[selectinput]">
+                            <?php
+                                $selected = $options['selectinput'];
+                                foreach ($select_options as $option) :
+                                    $is_selected = ($selected == $option['value']) ? 'selected="selected"' : '';
+                                    echo "<option {$is_selected} value='{$option['value']}'>{$option['label']}</option>";
+                                endforeach;
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <p class="submit">
+                <input type="submit" class="button-primary" value="Сохранить настройки" />
+            </p>
+        </form>
+    </div>
+    <?php
+}
+

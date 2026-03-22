@@ -607,7 +607,8 @@ body {
     .podrt_descr {
     background-color: #FAFAFA;
     max-width:500px;
-    margin:auto
+    margin:auto;
+    border-radius: 3px
     }
     
     .podrt_descr p,.podrt_descr h3 {
@@ -716,7 +717,12 @@ body {
     font-weight:600;
     margin-top:10px;
     float:right;
-    border-radius: 3px
+    border-radius: 3px;
+    transition: filter 0.5s ease
+    }
+
+    .main_form button:hover {
+        filter: brightness(90%);
     }
     
     .form-group {
@@ -986,7 +992,7 @@ body {
     max-width: 400px;
     margin: 20px auto;
     position: relative;
-    border-radius: 10px;
+    border-radius: 3px;
 }
 
 .success-content i {

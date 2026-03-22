@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = strip_tags(trim($_POST["email"] ?? 'Пусто'));
     $message = strip_tags(trim($_POST["message"] ?? 'Пусто'));
 
-    $text = "<b>Новая заявка с сайта!</b>\n";
+    $text = "<b>Новая заявка с сайта Hight-Wave:</b>\n";
     $text .= "<b>Имя:</b> " . $name . "\n";
     $text .= "<b>Email:</b> " . $email . "\n";
     $text .= "<b>Сообщение:</b> " . $message;

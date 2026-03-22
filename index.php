@@ -684,22 +684,41 @@
 </section>
 <?php endif; ?>
 
+<!-- Data for Form -->
+<?php
+	$post_type = 'landing_sections';
+	$popup_form = get_page_by_path('popup-form', OBJECT, $post_type);
+
+	if($popup_form) : 
+
+		$thanks_txt      = get_post_meta($popup_form->ID, 'thanks_txt', true);
+		$attention_txt   = get_post_meta($popup_form->ID, 'attention_txt', true);
+
+		$message_txt_1p  = get_post_meta($popup_form->ID, 'message_txt_1p', true);
+		$message_txt_2p  = get_post_meta($popup_form->ID, 'message_txt_2p', true);
+		$message_att_txt = get_post_meta($popup_form->ID, 'message_att_txt', true);
+
+		$close_txt       = get_post_meta($popup_form->ID, 'close_txt', true);
+		$ok_txt          = get_post_meta($popup_form->ID, 'ok_txt', true);
+		
+?>
+
 <!-- PopUp for Form --> 
  <div id="success-popup" class="white-popup mfp-hide">
 	<div class="success-content">
 		<i class="fa fa-check-circle"></i>
-		<h3>Спасибо</h3>
-		<p>Ваше сообщение успешно отправлено. <br> Мы свяжемся с вами в ближайшее время.</p>
-		<button class="button mfp-close-btn">Закрыть</button>
+		<h3><?php echo esc_html($thanks_txt); ?></h3>
+		<p><?php echo esc_html($message_txt_1p); ?><br> <?php echo esc_html($message_txt_2p); ?></p>
+		<button class="button mfp-close-btn"><?php echo esc_html($close_txt); ?></button>
 	</div>
  </div>
  <div id="error-popup" class="white-popup mfp-hide">
 	<div class="success-content">
-		<i class="fa fa-exclamation-circle" style="color: #e74c3c"></i> <h3>Внимание!</h3>
-		<p>Пожалуйста, заполните все обязательные поля перед отправкой.</p>
-		<button class="button mfp-close-btn">ОК</button>
+		<i class="fa fa-exclamation-circle" style="color: #e74c3c"></i> <h3><?php echo esc_html($attention_txt); ?></h3>
+		<p><?php echo esc_html($message_att_txt); ?></p>
+		<button class="button mfp-close-btn"><?php echo esc_html($ok_txt); ?></button>
 	</div>
  </div>
-
+<?php endif; ?>
 
 <?php get_footer(); ?>
