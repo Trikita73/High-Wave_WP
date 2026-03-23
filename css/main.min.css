@@ -454,7 +454,7 @@ body {
     .social_wrap li a:hover {
     -webkit-transition:.25s;
     transition:.25s;
-    color: #688eac
+    color: #4f88b4
     }
     
     .resume_container .left {
@@ -656,7 +656,7 @@ body {
     }
 
     .modal-box-content a:hover {
-        background-color: #688eac;
+        background-color: #4f88b4;
         color: #FAFAFA;
     }
     
@@ -761,7 +761,8 @@ body {
     bottom:0;
     border-radius:3px;
     border:medium none;
-    bottom:20px
+    bottom:20px;
+    transition: all 0.5s ease;
     }
     
     .top_button:hover {

@@ -56,6 +56,9 @@ section h3 {
 .s_about p:nth-child(even) {
   color: #FF6347; }
 
+.s_about .text-blue {
+  color: #FF6347; }
+
 .resume_container h3 {
   color: #222;
   letter-spacing: 1px; }
@@ -104,4 +107,25 @@ form .form-group {
 .top_button {
   color: #fff; }
   .top_button:hover {
-    color: #2EA2CC; }
+    color: #FF6347; }
+
+.mfp-close-btn {
+  background: #FF6347; }
+
+.success-content i {
+  color: #FF6347; }
+
+.portfolio_item .port_item_cont .popup_content {
+  border: 1px solid #FF6347;
+  color: #FF6347; }
+
+.view-fifth h2 {
+  background: rgba(255, 99, 71, 0.8); 
+  box-shadow: 0 1px 3px rgba(255, 99, 71, 0.5); 
+  filter: brightness(140%); }
+
+.modal-box-content a:hover {
+  background-color: #FF6347; }
+
+.social_wrap li a:hover {
+  color: #c26150; }

@@ -97,7 +97,7 @@ function theme_register_nav_menu() {
 function theme_settings_init() {
     register_setting('sample_options', 'sample_theme_options');
 }
-add_action('admin_init', 'theme_setting_init');
+add_action('admin_init', 'theme_settings_init');
 
 /**
  * Добавление страницы в меню админки
@@ -154,3 +154,22 @@ function theme_options_do_page() {
     <?php
 }
 
+function high_wave_scripts() {
+    // Подключаем основной стиль темы
+    wp_enqueue_style( 'main-style', get_stylesheet_uri() );
+
+    // Получаем настройки из базы
+    $options = get_option( 'sample_theme_options' );
+    $color_scheme = $options['selectinput']; // Например, 'tomato'
+
+    // Если выбрана схема и файл существует — подключаем его
+    if ( !empty($color_scheme) && $color_scheme !== 'default' ) {
+        wp_enqueue_style( 
+            'theme-color-scheme', 
+            get_template_directory_uri() . '/css/skins/' . $color_scheme . '.css', 
+            array('main-style'), // Указываем, что этот файл должен идти ПОСЛЕ основного
+            '1.0' 
+        );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'high_wave_scripts' );
